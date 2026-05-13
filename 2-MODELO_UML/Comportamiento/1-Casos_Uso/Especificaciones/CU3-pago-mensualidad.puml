@@ -1,0 +1,46 @@
+@startuml
+left to right direction
+!theme plain
+
+skinparam backgroundColor #FFF0F5
+skinparam packageBackgroundColor #FFC0CB
+skinparam packageBorderColor #C71585
+
+skinparam usecase {
+    BackgroundColor #FFD1DC
+    BorderColor #C71585
+    ArrowColor #C71585
+}
+
+skinparam actor {
+    BorderColor #C71585
+    BackgroundColor #FFB6C1
+}
+
+actor "Administrador" as admin
+actor "Padre" as padre
+
+package "SISTEMA SYS-COLEGIO-EMANUEL" {
+
+    usecase "Registrar Pago\nMensualidad" as pago
+    usecase "Buscar Alumno" as alumno
+    usecase "Seleccionar Mes y Monto" as monto
+    usecase "Guardar Fecha de Pago" as fecha
+    usecase "Actualizar Estado Pago" as estado
+    usecase "Enviar Notificación al Padre" as notificacion
+    usecase "Generar Recordatorio" as reminder
+    usecase "Actualizar en Tiempo Real" as realtime
+
+
+admin --> pago
+padre --> notificacion
+
+pago ..> alumno : <<include>>
+pago ..> monto : <<include>>
+pago ..> fecha : <<include>>
+pago ..> estado : <<include>>
+pago ..> notificacion : <<include>>
+pago ..> reminder : <<include>>
+pago ..> realtime : <<include>>
+
+@enduml
