@@ -1,0 +1,44 @@
+@startuml
+left to right direction
+!theme plain
+
+skinparam backgroundColor #FFF0F5
+skinparam packageBackgroundColor #FFC0CB
+skinparam packageBorderColor #C71585
+
+skinparam usecase {
+    BackgroundColor #FFD1DC
+    BorderColor #C71585
+    ArrowColor #C71585
+}
+
+skinparam actor {
+    BorderColor #C71585
+    BackgroundColor #FFB6C1
+}
+
+actor "Docente" as docente
+actor "Padre" as padre
+
+package "SISTEMA SYS-COLEGIO-EMANUEL" {
+
+    usecase "Registrar Notas" as notas
+    usecase "Verificar Curso Asignado" as verificar
+    usecase "Seleccionar Alumno" as alumno
+    usecase "Registrar Nota Bimestral" as bimestre
+    usecase "Actualizar Promedio" as promedio
+    usecase "Publicar Nota" as publicar
+    usecase "Registrar Auditoría" as auditoria
+}
+
+docente --> notas
+padre --> publicar
+
+notas ..> verificar : <<include>>
+notas ..> alumno : <<include>>
+notas ..> bimestre : <<include>>
+notas ..> promedio : <<include>>
+notas ..> publicar : <<include>>
+notas ..> auditoria : <<include>>
+
+@enduml
