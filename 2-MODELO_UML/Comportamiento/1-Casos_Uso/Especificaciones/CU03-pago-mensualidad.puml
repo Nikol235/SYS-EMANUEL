@@ -1,0 +1,54 @@
+@startuml
+left to right direction
+!theme plain
+
+skinparam backgroundColor #F0FFF4
+skinparam packageBackgroundColor #C8E6C9
+skinparam packageBorderColor #0f5c2e
+
+skinparam usecase {
+    BackgroundColor #D5E8D4
+    BorderColor #0f5c2e
+    ArrowColor #0f5c2e
+}
+
+skinparam actor {
+    BorderColor #0f5c2e
+    BackgroundColor #A5D6A7
+}
+
+title CU03 - Registrar Pago de Mensualidad\nSistema: SYS-COLEGIO-EMANUEL
+
+actor "Admin / Secretaria" as admin
+actor "Padre"              as padre
+
+package "SISTEMA SYS-COLEGIO-EMANUEL" {
+
+    usecase "Registrar Pago\nMensualidad" as pago
+    usecase "Buscar Alumno\nen AdminPagos" as buscar
+    usecase "Seleccionar Mes\ny Monto" as monto
+    usecase "Guardar Fecha\nde Pago" as fecha
+    usecase "Actualizar Estado\na Pagado" as estado
+    usecase "Notificar al Padre\n(Push FCM)" as notif
+    usecase "Generar Recordatorio\n(Cron Job)" as reminder
+    usecase "Actualizar UI\nen Tiempo Real (SSE)" as sse
+}
+
+admin --> pago
+padre --> notif
+
+pago ..> buscar   : <<include>>
+pago ..> monto    : <<include>>
+pago ..> fecha    : <<include>>
+pago ..> estado   : <<include>>
+pago ..> notif    : <<include>>
+pago ..> reminder : <<extend>>
+pago ..> sse      : <<include>>
+
+note right of reminder
+  Cron job lanza alerta
+  si la mensualidad
+  está por vencer
+end note
+
+@enduml
