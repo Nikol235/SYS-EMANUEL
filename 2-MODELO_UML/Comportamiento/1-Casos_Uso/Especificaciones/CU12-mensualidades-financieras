@@ -1,0 +1,47 @@
+@startuml
+left to right direction
+
+skinparam backgroundColor #FFF0F5
+skinparam packageBackgroundColor #FFC0CB
+skinparam packageBorderColor #C71585
+
+skinparam usecase {
+    BackgroundColor #FFD1DC
+    BorderColor #C71585
+    ArrowColor #C71585
+}
+
+skinparam actor {
+    BorderColor #C71585
+    BackgroundColor #FFB6C1
+}
+
+actor "Padre" as padre
+actor "Administrador" as admin
+
+package "SISTEMA SYS-COLEGIO-EMANUEL" {
+
+    usecase "Gestionar Mensualidades" as principal
+    usecase "Calcular Saldos y Deudas" as saldos
+    usecase "Generar Reporte Financiero" as reporte
+    usecase "Registrar Auditoria" as auditoria
+    usecase "Registrar Pago" as pago
+    usecase "Consultar Estado de Cuenta" as estado
+}
+
+padre --> estado
+padre --> pago
+
+admin --> principal
+admin --> reporte
+
+principal ..> pago : <<include>>
+principal ..> saldos : <<include>>
+principal ..> reporte : <<include>>
+principal ..> auditoria : <<include>>
+
+estado ..> saldos : <<include>>
+
+pago ..> auditoria : <<include>>
+
+@enduml
