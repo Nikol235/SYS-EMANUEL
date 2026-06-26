@@ -1,0 +1,35 @@
+@startjson
+{
+  "Caso de uso": "Gestionar Mensualidades",
+  "Id": "CU-12",
+  "Breve descripción": "El sistema permite al Padre registrar pagos de mensualidades, consultar saldos y deudas; y al Administrador calcular saldos globales y generar reportes financieros.",
+  "Actores primarios": "Padre, Administrador",
+  "Actores secundarios": "Pasarela de pagos (Yape/Plin), Base de Datos de Auditoría",
+  "Precondiciones": [
+    "El Padre o Administrador ha iniciado sesión exitosamente.",
+    "El alumno está matriculado y tiene mensualidades generadas en el sistema.",
+    "La deuda tiene un estado pendiente o vencido."
+  ],
+  "Flujo principal": {
+    "1": "El usuario accede al módulo de Mensualidades Financieras.",
+    "2": "El sistema solicita seleccionar al alumno.",
+    "3": "El sistema (MensualidadesService) calcula y muestra los saldos y deudas.",
+    "4": "El usuario selecciona la mensualidad a pagar y el método de pago.",
+    "5": "El sistema valida la transacción con la pasarela de pagos.",
+    "6": "El sistema actualiza el estado de la deuda a 'Pagado'.",
+    "7": "El sistema genera el comprobante de pago.",
+    "8": "El sistema (Auditoria Service) guarda el log de la operación.",
+    "9": "El sistema muestra el comprobante y confirma el éxito."
+  },
+  "Postcondiciones": [
+    "El estado de la mensualidad cambia a 'Pagado'.",
+    "El saldo del alumno se actualiza correctamente.",
+    "Se ha generado un registro de auditoría y un comprobante descargable."
+  ],
+  "Flujos alternativos": {
+    "A1: Pago rechazado": "La pasarela de pagos rechaza la operación por fondos insuficientos o error de red, el sistema muestra el error y mantiene la deuda como 'Pendiente'.",
+    "A2: Sin deudas pendientes": "El sistema notifica que el alumno no tiene deudas y solo muestra el historial de pagos anteriores.",
+    "A3: Sesión expirada": "Si la sesión del usuario ha caducado, el sistema redirige al Login antes de procesar el pago."
+  }
+}
+@endjson

@@ -1,0 +1,50 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam participantBackgroundColor #FFD1DC
+skinparam participantBorderColor #C71585
+skinparam actorBackgroundColor #FFB6C1
+skinparam actorBorderColor #C71585
+skinparam arrowColor #C71585
+skinparam lifeLineBorderColor #C71585
+
+actor "Padre" as padre
+participant "Interfaz Web" as ui
+participant "ControladorPago" as controller
+participant "ServicioFinanciero" as service
+participant "BaseDatos" as db
+
+padre -> ui : Selecciona "Pagar Mensualidad"
+activate ui
+ui -> controller : solicitarDeuda(idAlumno)
+activate controller
+controller -> service : calcularSaldos(idAlumno)
+activate service
+service -> db : SELECT * FROM mensualidad WHERE estado = 'PENDIENTE'
+activate db
+db --> service : Retorna lista de deudas
+deactivate db
+service --> controller : devuelveDeudas(deudas)
+deactivate service
+controller --> ui : mostrarDeudas(deudas)
+deactivate controller
+ui --> padre : Muestra tabla con saldos
+deactivate ui
+
+padre -> ui : Selecciona deuda y metodo Yape
+activate ui
+ui -> controller : procesarPago(idDeuda, metodo)
+activate controller
+controller -> service : registrarTransaccion(detalle)
+activate service
+service -> db : UPDATE mensualidad SET estado = 'PAGADO'
+activate db
+db --> service : Transaccion exitosa
+deactivate db
+service --> controller : devuelveComprobante()
+deactivate service
+controller --> ui : mostrarComprobante()
+deactivate controller
+ui --> padre : Muestra recibo de pago
+deactivate ui
+
+@enduml
