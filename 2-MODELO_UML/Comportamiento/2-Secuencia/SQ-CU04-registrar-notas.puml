@@ -1,0 +1,62 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam participantBackgroundColor #FFD1DC
+skinparam participantBorderColor #C71585
+skinparam actorBackgroundColor #FFB6C1
+skinparam actorBorderColor #C71585
+skinparam arrowColor #C71585
+skinparam lifeLineBorderColor #C71585
+
+actor "Docente" as user
+participant "App Web" as app
+participant "NotaController" as controller
+participant "NotaService" as service
+participant "BaseDatos" as db
+
+== 1. Carga de la Matriz de Notas ==
+user -> app : Selecciona filtros (Grado, Sección, Curso, Bimestre)
+activate app
+app -> controller : obtenerMatrizEstudiantes(filtros)
+activate controller
+controller -> service : listarAlumnosYNotas(filtros)
+activate service
+service -> db : consultarEstudiantesYCasilleros(filtros)
+activate db
+db --> service : Lista de alumnos con sus notas
+deactivate db
+service --> controller : retornaListaMatriz()
+deactivate service
+controller --> app : mostrarMatrizInteractiva()
+deactivate controller
+app --> user : Muestra matriz con casilleros de notas en pantalla
+deactivate app
+
+== 2. Registro y Consolidación de Calificaciones ==
+user -> app : Digita calificaciones y presiona 'Guardar y Consolidar'
+activate app
+app -> controller : registrarCalificaciones(matrizNotas)
+activate controller
+controller -> service : procesarRegistroNotas(matrizNotas)
+activate service
+
+service -> service : validarIntegridadRangos(0 a 20)
+service -> service : calcularPromediosAutomaticos()
+
+service -> db : guardarCalificaciones(matrizNotas)
+activate db
+db --> service : confirmacionPersistencia
+deactivate db
+
+service -> db : generarRegistroAuditoriaInmutable()
+activate db
+db --> service : confirmacionAuditoria
+deactivate db
+
+service --> controller : retornaResultado(exito)
+deactivate service
+controller --> app : mostrarConfirmacion(exito)
+deactivate controller
+app --> user : Muestra "Las calificaciones quedaron almacenadas permanentemente"
+deactivate app
+
+@enduml
