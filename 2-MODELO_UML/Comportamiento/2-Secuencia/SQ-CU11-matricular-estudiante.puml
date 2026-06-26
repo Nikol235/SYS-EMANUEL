@@ -1,0 +1,52 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam participantBackgroundColor #FFD1DC
+skinparam participantBorderColor #C71585
+skinparam actorBackgroundColor #FFB6C1
+skinparam actorBorderColor #C71585
+skinparam arrowColor #C71585
+skinparam lifeLineBorderColor #C71585
+
+actor "Secretaria" as sec
+participant "App Web" as app
+participant "MatriculaController" as controller
+participant "MatriculaService" as service
+participant "UsuarioService" as usuarioSvc
+participant "BaseDatos" as db
+
+sec -> app : Ingresa datos del estudiante, padre, grado y sección
+activate app
+app -> controller : registrarMatricula(datosEstudiante, datosPadre, grado, seccion)
+activate controller
+controller -> service : procesarMatricula(datos)
+activate service
+service -> db : verificarDuplicadoDNI(dni, periodo)
+activate db
+db --> service : duplicado: false
+deactivate db
+service -> db : verificarCuposSeccion(idSeccion)
+activate db
+db --> service : cuposDisponibles: true
+deactivate db
+service -> service : generarCodigoEstudiante()
+service -> usuarioSvc : crearCuentaEstudiante(datos, codigoGenerado)
+activate usuarioSvc
+usuarioSvc --> service : cuentaCreada
+deactivate usuarioSvc
+service -> usuarioSvc : crearCuentaPadre(datosPadre)
+activate usuarioSvc
+usuarioSvc --> service : cuentaCreada
+deactivate usuarioSvc
+service -> service : generarCodigoQR(codigoEstudiante)
+service -> db : guardarMatricula(matricula, qr)
+activate db
+db --> service : matriculaGuardada
+deactivate db
+service --> controller : retornaMatricula(comprobante)
+deactivate service
+controller --> app : mostrarComprobante(matricula)
+deactivate controller
+app --> sec : Muestra comprobante con código QR y credenciales
+deactivate app
+
+@enduml
