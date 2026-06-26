@@ -1,0 +1,72 @@
+@startuml
+title Diagrama de Estado - SYS Colegio Emanuel
+
+skinparam backgroundColor #FFF9FC
+skinparam shadowing false
+
+skinparam state {
+    BackgroundColor #FFD6E8
+    BorderColor #E91E63
+    FontColor #880E4F
+    FontStyle bold
+}
+
+skinparam ArrowColor #E91E63
+
+[*] --> Inicio_Sesion
+
+state Inicio_Sesion
+state Menu_Principal
+state Registrar_Asistencia
+state Pago_Mensualidad
+state Registrar_Notas
+state Publicar_Avance
+state Enviar_Comunicado
+state Gestionar_Usuarios
+state Consultas_Academicas
+state Notificaciones
+state Gestionar_Materias
+state Matricular_Estudiante
+state Reporte_Financiero
+state Cerrar_Sesion
+
+Inicio_Sesion --> Menu_Principal : Login correcto
+
+Menu_Principal --> Registrar_Asistencia : Registrar asistencia QR
+Registrar_Asistencia --> Menu_Principal : Finalizar
+
+Menu_Principal --> Pago_Mensualidad : Registrar pago
+Pago_Mensualidad --> Menu_Principal : Guardar
+
+Menu_Principal --> Registrar_Notas : Registrar notas
+Registrar_Notas --> Menu_Principal : Guardar
+
+Menu_Principal --> Publicar_Avance : Publicar tareas
+Publicar_Avance --> Menu_Principal : Publicar
+
+Menu_Principal --> Enviar_Comunicado : Enviar aviso
+Enviar_Comunicado --> Menu_Principal : Finalizar
+
+Menu_Principal --> Gestionar_Usuarios : Gestionar usuarios
+Gestionar_Usuarios --> Menu_Principal : Guardar
+
+Menu_Principal --> Consultas_Academicas : Consultar información
+Consultas_Academicas --> Menu_Principal : Regresar
+
+Menu_Principal --> Notificaciones : Ver notificaciones
+Notificaciones --> Menu_Principal : Regresar
+
+Menu_Principal --> Gestionar_Materias : Administrar materias
+Gestionar_Materias --> Menu_Principal : Guardar
+
+Menu_Principal --> Matricular_Estudiante : Registrar matrícula
+Matricular_Estudiante --> Menu_Principal : Finalizar
+
+Menu_Principal --> Reporte_Financiero : Consultar mensualidades
+Reporte_Financiero --> Menu_Principal : Regresar
+
+Menu_Principal --> Cerrar_Sesion : Cerrar sesión
+
+Cerrar_Sesion --> [*]
+
+@enduml
