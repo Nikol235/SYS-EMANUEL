@@ -1,0 +1,194 @@
+@startuml
+title Diagrama de Clases - Consultas Académicas - SYS COLEGIO EMANUEL
+
+'====================================
+' ENUMS
+'====================================
+
+enum EstadoAsistencia {
+    PRESENTE
+    TARDE
+    FALTA
+    JUSTIFICADO
+}
+
+enum Rol {
+    PADRE
+    DOCENTE
+    ADMINISTRADOR
+}
+
+enum EstadoEmail {
+    ENVIADO
+    PENDIENTE
+    FALLIDO
+}
+
+'=================================
+' USUARIOS
+'=================================
+
+abstract class Usuario {
+    - idUsuario: int
+    - username: String
+    - password: String
+    - nombres: String
+    - apellidos: String
+    - estado: boolean
+    - ultimoAcceso: DateTime
+
+    + login(): boolean
+    + logout(): void
+    + cambiarPassword(nueva: String): void
+}
+
+class Padre {
+    - idPadre: int
+    - dni: String
+    - telefono: String
+    - email: String
+
+    + consultarNotas(): List<Nota>
+    + consultarAsistencia(): List<RegistroAsistencia>
+    + consultarHorario(): List<Horario>
+    + solicitarBoleta(): Boleta
+}
+
+class Docente {
+    - codigoEmpleado: String
+    - especialidad: String
+
+    + consultarNotasAlumno(): List<Nota>
+    + registrarAsistencia(): void
+    + verEstadoAcademico(): EstadoAcademico
+}
+
+Usuario <|-- Padre : es un tipo de
+Usuario <|-- Docente : es un tipo de
+Usuario --> Rol : asignado
+
+'=====================================
+' ALUMNO
+'=====================================
+
+class Alumno {
+    - idAlumno: int
+    - codigoEstudiante: String
+    - nombres: String
+    - apellidos: String
+    - grado: String
+    - seccion: String
+
+    + obtenerPromedioGeneral(): double
+    + obtenerEstadoAcademico(): String
+}
+
+Padre "1" -- "1..*" Alumno : es apoderado de
+
+'=====================================
+' ACADEMICO
+'=====================================
+
+class Curso {
+    - idCurso: int
+    - nombre: String
+    - creditos: int
+    - horario: String
+
+    + listarAlumnos(): List<Alumno>
+}
+
+class Nota {
+    - idNota: int
+    - nota1: double
+    - nota2: double
+    - nota3: double
+    - promedio: double
+    - periodo: String
+
+    + calcularPromedio(): double
+    + actualizarNota(nueva: double): void
+}
+
+class RegistroAsistencia {
+    - idRegistro: int
+    - fecha: Date
+    - horaIngreso: Time
+    - estado: EstadoAsistencia
+    - observacion: String
+
+    + registrarIngreso(): void
+    + cambiarEstado(nuevoEstado: EstadoAsistencia): void
+}
+
+class Horario {
+    - idHorario: int
+    - diaSemana: String
+    - horaInicio: Time
+    - horaFin: Time
+    - aula: String
+}
+
+class Boleta {
+    - idBoleta: int
+    - periodo: String
+    - fechaEmision: DateTime
+    - promedioGeneral: double
+
+    + generarPDF(): void
+    + calcularPromedioGeneral(): double
+}
+
+class EstadoAcademico {
+    - idEstado: int
+    - estado: String
+    - fechaEvaluacion: DateTime
+    - observaciones: String
+
+    + determinarEstado(): String
+}
+
+Alumno "1" --> "0..*" Nota : obtiene
+Alumno "1" --> "0..*" RegistroAsistencia : registra
+Alumno "1..*" --> "0..*" Curso : cursa
+Alumno "1" --> "0..*" Horario : sigue
+Curso "1" --> "0..*" Nota : evalua
+Alumno "1" --> "0..*" Boleta : genera
+Alumno "1" --> "0..*" EstadoAcademico : tiene
+
+'=========================================
+' NOTIFICACIONES
+'=========================================
+
+class Email {
+    - idEmail: int
+    - destinatario: String
+    - asunto: String
+    - fechaEnvio: DateTime
+    - estado: EstadoEmail
+
+    + enviar(): boolean
+    + reenviar(): boolean
+}
+
+Usuario "1" --> "0..*" Email : recibe
+
+'========================
+' AUDITORIA
+'========================
+
+class Auditoria {
+    - idAuditoria: int
+    - fechaHora: DateTime
+    - accion: String
+    - modulo: String
+    - descripcion: String
+    - ipOrigen: String
+
+    + registrarEvento(): void
+    + generarTraza(): void
+}
+
+Usuario "1" --> "*" Auditoria : genera
+
+@enduml
