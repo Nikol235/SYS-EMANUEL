@@ -1,0 +1,159 @@
+@startuml
+title Diagrama de Clases - Mensualidades Financieras - SYS COLEGIO EMANUEL
+
+'====================================
+' ENUMS
+'====================================
+
+enum EstadoPago {
+    PENDIENTE
+    PAGADO
+    VENCIDO
+    ANULADO
+}
+
+enum MetodoPago {
+    YAPE
+    PLIN
+    EFECTIVO
+    TARJETA
+}
+
+enum Rol {
+    PADRE
+    ADMINISTRADOR
+}
+
+'=================================
+' USUARIOS
+'=================================
+
+abstract class Usuario {
+    - idUsuario: int
+    - username: String
+    - password: String
+    - nombres: String
+    - apellidos: String
+    - estado: boolean
+    - ultimoAcceso: DateTime
+
+    + login(): boolean
+    + logout(): void
+    + cambiarPassword(nueva: String): void
+}
+
+class Padre {
+    - idPadre: int
+    - dni: String
+    - telefono: String
+    - email: String
+
+    + registrarPago(): Pago
+    + consultarDeuda(): List<Mensualidad>
+    + descargarComprobante(): void
+}
+
+class Administrador {
+    - codigoEmpleado: String
+
+    + generarReporteFinanciero(): Reporte
+    + calcularSaldosGlobales(): double
+    + consultarMorosos(): List<Alumno>
+}
+
+Usuario <|-- Padre : es un tipo de
+Usuario <|-- Administrador : es un tipo de
+Usuario --> Rol : asignado
+
+'=====================================
+' ALUMNO
+'=====================================
+
+class Alumno {
+    - idAlumno: int
+    - codigoEstudiante: String
+    - nombres: String
+    - apellidos: String
+    - grado: String
+    - seccion: String
+
+    + obtenerDeudaTotal(): double
+}
+
+Padre "1" -- "1..*" Alumno : es apoderado de
+
+'=====================================
+' FINANCIERO
+'=====================================
+
+class Mensualidad {
+    - idMensualidad: int
+    - mes: String
+    - anio: int
+    - monto: double
+    - fechaVencimiento: Date
+    - estado: EstadoPago
+
+    + calcularMora(): double
+    + actualizarEstado(nuevoEstado: EstadoPago): void
+}
+
+class Pago {
+    - idPago: int
+    - fechaPago: DateTime
+    - montoPagado: double
+    - metodo: MetodoPago
+    - nroOperacion: String
+
+    + procesarTransaccion(): boolean
+    + generarComprobante(): Comprobante
+}
+
+class DetallePago {
+    - montoAbonado: double
+}
+
+class Comprobante {
+    - idComprobante: int
+    - numeroRecibo: String
+    - fechaEmision: DateTime
+
+    + descargarPDF(): void
+    + enviarPorEmail(): void
+}
+
+class Reporte {
+    - idReporte: int
+    - fechaGeneracion: DateTime
+    - totalRecaudado: double
+    - totalMorosidad: double
+
+    + exportarExcel(): void
+}
+
+Alumno "1" --> "0..*" Mensualidad : genera
+Mensualidad "1..*" -- "0..*" Pago : cancela
+Pago "1" *-- "1..*" DetallePago : detalle
+Pago "1" --> "1" Comprobante : emite
+Padre "1" --> "0..*" Pago : realiza
+Administrador "1" --> "0..*" Reporte : genera
+
+'========================
+' AUDITORIA
+'========================
+
+class Auditoria {
+    - idAuditoria: int
+    - fechaHora: DateTime
+    - accion: String
+    - modulo: String
+    - descripcion: String
+    - ipOrigen: String
+
+    + registrarEvento(): void
+    + generarTraza(): void
+}
+
+Usuario "1" --> "*" Auditoria : genera
+
+@enduml
