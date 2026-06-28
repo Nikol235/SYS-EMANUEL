@@ -1,0 +1,33 @@
+@startuml
+skinparam backgroundColor #F5F0FA
+skinparam stateBackgroundColor #E8D7F5
+skinparam stateBorderColor #8A2BE2
+skinparam arrowColor #9400D3
+
+[*] --> ModuloInactivo
+
+ModuloInactivo --> EsperandoFiltros : Docente ingresa al módulo
+
+EsperandoFiltros --> CargandoMatriz : Selecciona Año, Grado, Sección, Curso y Bimestre
+
+CargandoMatriz --> MatrizVacia : Error en consulta o sin alumnos matriculados
+MatrizVacia --> EsperandoFiltros : Cambiar criterios de búsqueda
+
+CargandoMatriz --> MatrizEditable : Alumnos y casilleros cargados con éxito
+
+MatrizEditable --> MatrizModificada : Docente digita o edita calificaciones
+MatrizModificada --> MatrizModificada : Sistema calcula promedios automáticamente
+
+MatrizModificada --> ValidandoDatos : Presiona "Guardar y Consolidar"
+
+ValidandoDatos --> MatrizEditable : Notas fuera de rango (No están entre 0 y 20) / Muestra error
+ValidandoDatos --> GuardandoCalificaciones : Datos correctos e íntegros
+
+GuardandoCalificaciones --> RegistrandoAuditoria : Persistencia en Base de Datos exitosa
+
+RegistrandoAuditoria --> NotasConsolidadas : Registro inmutable generado con éxito
+
+NotasConsolidadas --> ModuloInactivo : Finaliza sesión o sale del módulo
+ModuloInactivo --> [*]
+
+@enduml
