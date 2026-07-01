@@ -1,0 +1,35 @@
+@startjson
+{
+  "Caso de uso": "Pago de Mensualidad",
+  "Id": "CU-03",
+  "Breve descripción": "El sistema permite a la Secretaria registrar el pago de mensualidad de un estudiante, generando el comprobante de pago y actualizando el estado de cuenta, con notificación automática de confirmación al padre de familia.",
+  "Actores primarios": "Secretaria",
+  "Actores secundarios": "Padre, Microservicio de Mensualidades, Base de Datos Financiera",
+  "Precondiciones": [
+    "La Secretaria ha iniciado sesión exitosamente.",
+    "El estudiante está matriculado y activo en el sistema.",
+    "El periodo de pago está configurado con el monto de mensualidad."
+  ],
+  "Flujo principal": {
+    "1": "La Secretaria accede al módulo de Mensualidades y busca al estudiante por nombre o código.",
+    "2": "El sistema muestra el estado de cuenta del estudiante con los meses pendientes.",
+    "3": "La Secretaria selecciona el mes a pagar e ingresa el monto recibido.",
+    "4": "La Secretaria selecciona el método de pago (efectivo, transferencia).",
+    "5": "El sistema (MensualidadService) valida el monto ingresado.",
+    "6": "El sistema registra el pago y genera el número de comprobante.",
+    "7": "El sistema actualiza el estado del mes como 'Pagado'.",
+    "8": "El sistema envía una notificación push al padre confirmando el pago.",
+    "9": "El sistema muestra e imprime el comprobante de pago."
+  },
+  "Postcondiciones": [
+    "El pago queda registrado con fecha, monto y número de comprobante.",
+    "El estado de cuenta del estudiante se actualiza automáticamente.",
+    "El padre recibe la notificación de confirmación del pago."
+  ],
+  "Flujos alternativos": {
+    "A1: Monto incorrecto": "El sistema detecta que el monto ingresado no coincide con la mensualidad y solicita confirmación antes de registrar.",
+    "A2: Mes ya pagado": "El sistema informa que el mes seleccionado ya fue cancelado y muestra el comprobante anterior.",
+    "A3: Estudiante inactivo": "El sistema bloquea el registro de pago e informa que el estudiante no está activo en el periodo."
+  }
+}
+@endjson
