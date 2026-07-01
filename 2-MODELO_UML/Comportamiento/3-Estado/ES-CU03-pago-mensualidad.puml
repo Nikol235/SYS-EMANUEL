@@ -1,0 +1,26 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam stateBackgroundColor #FFD1DC
+skinparam stateBorderColor #C71585
+skinparam arrowColor #C71585
+
+[*] --> BuscandoEstudiante
+BuscandoEstudiante --> EstudianteInactivo : Estudiante retirado o inactivo
+EstudianteInactivo --> [*] : Bloquear registro de pago
+BuscandoEstudiante --> MostrandoEstadoCuenta : Estudiante activo encontrado
+MostrandoEstadoCuenta --> SeleccionandoMes : Secretaria revisa deuda
+SeleccionandoMes --> MesPagado : Mes ya fue cancelado
+MesPagado --> MostrandoEstadoCuenta : Ver comprobante anterior
+SeleccionandoMes --> IngresandoMonto : Mes pendiente seleccionado
+IngresandoMonto --> MontoIncorrecto : Monto no coincide con tarifa
+MontoIncorrecto --> ConfirmandoMonto : Secretaria confirma igualmente
+MontoIncorrecto --> IngresandoMonto : Corregir monto
+ConfirmandoMonto --> RegistrandoPago : Confirmado
+IngresandoMonto --> RegistrandoPago : Monto correcto validado
+RegistrandoPago --> ActualizandoEstado : Pago guardado en BD
+ActualizandoEstado --> NotificandoPadre : Mes marcado como PAGADO
+NotificandoPadre --> GenerandoComprobante : Notificación enviada al padre
+GenerandoComprobante --> Finalizado : Comprobante mostrado
+Finalizado --> [*]
+
+@enduml

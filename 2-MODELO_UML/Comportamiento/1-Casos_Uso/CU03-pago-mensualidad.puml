@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+skinparam backgroundColor #B6E3A6
+
+actor "Secretaria" as secretaria
+
+package "Sistema SYS COLEGIO EMANUEL" {
+    usecase "Registrar Pago de Mensualidad" as registrar
+    usecase "Autenticar Usuario" as auth
+    usecase "Buscar Estudiante" as buscar
+    usecase "Validar Monto de Pago" as validar
+    usecase "Actualizar Estado de Cuenta" as actualizar
+    usecase "Generar Comprobante de Pago" as comprobante
+    usecase "Notificar al Padre" as notificar
+}
+
+secretaria --> registrar
+
+registrar ..> auth : <<include>>
+registrar ..> buscar : <<include>>
+registrar ..> validar : <<include>>
+registrar ..> actualizar : <<include>>
+registrar ..> comprobante : <<include>>
+registrar ..> notificar : <<include>>
+
+@enduml

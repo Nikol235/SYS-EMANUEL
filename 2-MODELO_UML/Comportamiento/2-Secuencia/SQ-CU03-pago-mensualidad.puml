@@ -1,0 +1,52 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam participantBackgroundColor #FFD1DC
+skinparam participantBorderColor #C71585
+skinparam actorBackgroundColor #FFB6C1
+skinparam actorBorderColor #C71585
+skinparam arrowColor #C71585
+skinparam lifeLineBorderColor #C71585
+
+actor "Secretaria" as sec
+participant "App Web" as app
+participant "MensualidadController" as controller
+participant "MensualidadService" as service
+participant "BaseDatos" as db
+participant "NotificadorPadres" as notif
+
+sec -> app : Busca estudiante y selecciona mes a pagar
+activate app
+app -> controller : registrarPago(idEstudiante, mes, monto, metodoPago)
+activate controller
+controller -> service : procesarPago(idEstudiante, mes, monto, metodoPago)
+activate service
+service -> db : verificarEstadoEstudiante(idEstudiante)
+activate db
+db --> service : activo: true
+deactivate db
+service -> db : verificarEstadoMes(idEstudiante, mes)
+activate db
+db --> service : estado: PENDIENTE
+deactivate db
+service -> service : validarMonto(monto)
+service -> service : generarNumeroComprobante()
+service -> db : guardarPago(pago)
+activate db
+db --> service : pagoGuardado
+deactivate db
+service -> db : actualizarEstadoMensualidad(idMensualidad, PAGADO)
+activate db
+db --> service : actualizado
+deactivate db
+service -> notif : notificarPadre(idEstudiante, comprobante)
+activate notif
+notif --> service : notificacion enviada
+deactivate notif
+service --> controller : retornaComprobante(pago)
+deactivate service
+controller --> app : mostrarComprobante(pago)
+deactivate controller
+app --> sec : Muestra comprobante y estado actualizado
+deactivate app
+
+@enduml
