@@ -1,0 +1,34 @@
+@startjson
+{
+  "Caso de uso": "Gestionar Usuarios y Roles",
+  "Id": "CU-07",
+  "Breve descripción": "El sistema permite al Director crear, editar, activar, desactivar y eliminar cuentas de usuario, asignando o modificando roles (Director, Secretaria, Docente, Auxiliar, Padre, Estudiante) para controlar el acceso a las funciones del sistema.",
+  "Actores primarios": "Director",
+  "Actores secundarios": "Microservicio de Usuarios, Base de Datos de Autenticación",
+  "Precondiciones": [
+    "El Director ha iniciado sesión exitosamente.",
+    "El Director tiene permisos de administración del sistema."
+  ],
+  "Flujo principal": {
+    "1": "El Director accede al módulo de Gestión de Usuarios.",
+    "2": "El sistema muestra la lista de usuarios registrados con su rol y estado.",
+    "3": "El Director elige una acción: Crear, Editar, Activar/Desactivar o Eliminar.",
+    "4": "Si crea: ingresa nombre, apellido, username, contraseña temporal y rol.",
+    "5": "Si edita: modifica los datos del usuario seleccionado.",
+    "6": "Si activa/desactiva: cambia el estado activo del usuario.",
+    "7": "El sistema (UsuarioService) valida los datos ingresados.",
+    "8": "El sistema guarda los cambios en la base de datos.",
+    "9": "El sistema registra la acción en la auditoría y confirma la operación."
+  },
+  "Postcondiciones": [
+    "El usuario queda creado, actualizado o con su estado modificado en el sistema.",
+    "El nuevo usuario puede iniciar sesión con las credenciales asignadas.",
+    "La acción queda registrada en el historial de auditoría."
+  ],
+  "Flujos alternativos": {
+    "A1: Username duplicado": "El sistema rechaza la creación e informa que el username ya existe, solicitando uno diferente.",
+    "A2: Datos incompletos": "El sistema muestra validaciones en los campos obligatorios vacíos.",
+    "A3: Eliminar usuario con datos asociados": "El sistema advierte que el usuario tiene registros activos y recomienda desactivarlo en lugar de eliminarlo."
+  }
+}
+@endjson

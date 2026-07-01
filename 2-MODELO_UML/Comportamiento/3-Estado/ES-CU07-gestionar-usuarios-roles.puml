@@ -1,0 +1,26 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam stateBackgroundColor #FFD1DC
+skinparam stateBorderColor #C71585
+skinparam arrowColor #C71585
+
+[*] --> ListandoUsuarios
+ListandoUsuarios --> SeleccionandoAccion : Director elige usuario o "Nuevo"
+SeleccionandoAccion --> IngresandoDatos : Acción = Crear
+SeleccionandoAccion --> EditandoDatos : Acción = Editar
+SeleccionandoAccion --> ConfirmandoEstado : Acción = Activar/Desactivar
+SeleccionandoAccion --> ConfirmandoEliminacion : Acción = Eliminar
+IngresandoDatos --> ValidandoDatos : Director presiona "Guardar"
+EditandoDatos --> ValidandoDatos : Director presiona "Guardar"
+ValidandoDatos --> ErrorValidacion : Datos inválidos o username duplicado
+ErrorValidacion --> IngresandoDatos : Corregir
+ValidandoDatos --> GuardandoCambios : Datos válidos
+ConfirmandoEstado --> GuardandoCambios : Director confirma
+ConfirmandoEliminacion --> AdvertenciaRegistros : Usuario tiene datos asociados
+AdvertenciaRegistros --> ConfirmandoEstado : Recomendar desactivar
+AdvertenciaRegistros --> GuardandoCambios : Director confirma eliminación
+GuardandoCambios --> RegistrandoAuditoria : Cambios guardados en BD
+RegistrandoAuditoria --> Finalizado : Auditoría registrada
+Finalizado --> [*]
+
+@enduml
