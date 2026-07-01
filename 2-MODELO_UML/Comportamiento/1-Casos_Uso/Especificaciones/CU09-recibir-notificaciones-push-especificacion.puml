@@ -1,0 +1,32 @@
+@startjson
+{
+  "Caso de uso": "Recibir Notificaciones Push",
+  "Id": "CU-09",
+  "Breve descripción": "El sistema envía notificaciones push automáticas a los usuarios (Padres, Docentes, Estudiantes) cuando ocurren eventos relevantes como registro de asistencia, nueva nota, publicación de avance o comunicado institucional.",
+  "Actores primarios": "Padre, Docente, Estudiante",
+  "Actores secundarios": "Microservicio de Comunicados, Servicio de Push (Firebase FCM)",
+  "Precondiciones": [
+    "El usuario ha iniciado sesión y tiene la aplicación instalada.",
+    "El usuario ha autorizado el envío de notificaciones en su dispositivo.",
+    "El token de dispositivo FCM está registrado en el sistema."
+  ],
+  "Flujo principal": {
+    "1": "El sistema detecta un evento disparador (nueva nota, asistencia, comunicado, avance).",
+    "2": "El microservicio correspondiente invoca al ComunicadosService con el evento.",
+    "3": "El ComunicadosService obtiene la lista de tokens FCM de los destinatarios.",
+    "4": "El sistema envía la notificación push vía Firebase FCM.",
+    "5": "El dispositivo del usuario recibe y muestra la notificación.",
+    "6": "El sistema registra la notificación en el historial como entregada.",
+    "7": "El usuario puede acceder al historial de notificaciones desde la app."
+  },
+  "Postcondiciones": [
+    "La notificación queda registrada en el historial con estado de entrega.",
+    "El usuario puede revisar el detalle del evento desde la notificación."
+  ],
+  "Flujos alternativos": {
+    "A1: Token FCM inválido o expirado": "El sistema marca el token como inactivo, omite el envío y registra el fallo.",
+    "A2: Dispositivo sin conexión": "Firebase FCM reintenta la entrega cuando el dispositivo se reconecte.",
+    "A3: Usuario desactivó notificaciones": "El sistema omite el envío y registra la preferencia del usuario."
+  }
+}
+@endjson

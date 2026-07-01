@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+skinparam backgroundColor #B6E3A6
+
+actor "Padre" as padre
+actor "Docente" as docente
+actor "Estudiante" as estudiante
+
+package "Sistema SYS COLEGIO EMANUEL" {
+    usecase "Recibir Notificaciones Push" as recibir
+    usecase "Registrar Token de Dispositivo" as token
+    usecase "Enviar Notificación por Evento" as enviar
+    usecase "Consultar Historial de Notificaciones" as historial
+    usecase "Marcar Notificación como Leída" as marcar
+}
+
+padre --> recibir
+docente --> recibir
+estudiante --> recibir
+
+recibir ..> token : <<include>>
+recibir ..> enviar : <<include>>
+recibir ..> historial : <<extend>>
+recibir ..> marcar : <<extend>>
+
+@enduml
