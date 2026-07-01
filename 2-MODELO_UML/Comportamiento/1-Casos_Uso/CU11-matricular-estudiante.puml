@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+skinparam backgroundColor #B6E3A6
+
+actor "Secretaria" as secretaria
+
+package "Sistema SYS COLEGIO EMANUEL" {
+    usecase "Matricular Estudiante" as matricular
+    usecase "Autenticar Usuario" as auth
+    usecase "Registrar Datos del Estudiante" as registrar
+    usecase "Registrar Datos del Padre/Apoderado" as padre
+    usecase "Asignar Grado y Sección" as asignar
+    usecase "Generar Código QR" as qr
+    usecase "Validar Documentos" as validar
+}
+
+secretaria --> matricular
+
+matricular ..> auth : <<include>>
+matricular ..> registrar : <<include>>
+matricular ..> padre : <<include>>
+matricular ..> asignar : <<include>>
+matricular ..> qr : <<include>>
+matricular ..> validar : <<include>>
+
+@enduml
