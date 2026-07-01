@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+skinparam backgroundColor #B6E3A6
+
+actor "Director" as director
+actor "Secretaria" as secretaria
+
+package "Sistema SYS COLEGIO EMANUEL" {
+    usecase "Gestionar Mensualidades Financieras" as gestionar
+    usecase "Autenticar Usuario" as auth
+    usecase "Generar Reporte de Ingresos" as reporte
+    usecase "Consultar Deudores" as deudores
+    usecase "Configurar Tarifas y Descuentos" as tarifas
+    usecase "Exportar Reporte" as exportar
+}
+
+director --> gestionar
+secretaria --> gestionar
+
+gestionar ..> auth : <<include>>
+gestionar ..> reporte : <<extend>>
+gestionar ..> deudores : <<extend>>
+gestionar ..> tarifas : <<extend>>
+gestionar ..> exportar : <<include>>
+
+@enduml

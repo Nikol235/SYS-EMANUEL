@@ -1,0 +1,31 @@
+@startjson
+{
+  "Caso de uso": "Gestionar Mensualidades Financieras",
+  "Id": "CU-12",
+  "Breve descripción": "El sistema permite al Director y Secretaria consultar el estado financiero global del colegio, generar reportes de ingresos por periodo, identificar estudiantes deudores, configurar tarifas y descuentos, y exportar la información para su análisis.",
+  "Actores primarios": "Director, Secretaria",
+  "Actores secundarios": "Microservicio de Mensualidades, Base de Datos Financiera",
+  "Precondiciones": [
+    "El usuario (Director o Secretaria) ha iniciado sesión exitosamente.",
+    "Existen registros de pagos de mensualidad en el periodo consultado."
+  ],
+  "Flujo principal": {
+    "1": "El usuario accede al módulo de Mensualidades Financieras.",
+    "2": "El usuario selecciona el periodo (mes, bimestre o año académico) a consultar.",
+    "3": "El sistema (FinancieroService) calcula el total de ingresos, pagos pendientes y morosidad.",
+    "4": "El sistema muestra el reporte consolidado con gráficos e indicadores.",
+    "5": "El usuario puede filtrar por grado, sección o estado de pago.",
+    "6": "El usuario consulta la lista de estudiantes deudores si lo requiere.",
+    "7": "El usuario puede exportar el reporte en PDF o Excel."
+  },
+  "Postcondiciones": [
+    "El usuario visualiza el estado financiero actualizado del periodo.",
+    "Si se solicitó, el reporte queda exportado y disponible para descarga."
+  ],
+  "Flujos alternativos": {
+    "A1: Sin datos en el periodo": "El sistema informa que no hay registros de pago para el periodo seleccionado.",
+    "A2: Error al exportar": "El sistema muestra el reporte en pantalla pero notifica que la exportación falló, permitiendo reintentar.",
+    "A3: Cambio de tarifa retroactivo": "Si se modifica una tarifa, el sistema advierte que el cambio solo aplica a periodos futuros, no a pagos ya registrados."
+  }
+}
+@endjson
