@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+skinparam backgroundColor #B6E3A6
+
+actor "Director" as director
+
+package "Sistema SYS COLEGIO EMANUEL" {
+    usecase "Gestionar Usuarios y Roles" as gestionar
+    usecase "Autenticar Usuario" as auth
+    usecase "Crear Usuario" as crear
+    usecase "Editar Usuario" as editar
+    usecase "Activar/Desactivar Usuario" as estado
+    usecase "Asignar Rol" as rol
+    usecase "Registrar Auditoría" as auditoria
+}
+
+director --> gestionar
+
+gestionar ..> auth : <<include>>
+gestionar ..> crear : <<extend>>
+gestionar ..> editar : <<extend>>
+gestionar ..> estado : <<extend>>
+gestionar ..> rol : <<include>>
+gestionar ..> auditoria : <<include>>
+
+@enduml
