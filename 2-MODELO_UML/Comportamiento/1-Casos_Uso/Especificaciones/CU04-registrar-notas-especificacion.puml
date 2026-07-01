@@ -1,0 +1,34 @@
+@startjson
+{
+  "Caso de uso": "Registrar Notas",
+  "Id": "CU-04",
+  "Breve descripción": "El sistema permite al Docente registrar, editar y consultar las calificaciones de los estudiantes por curso y periodo, calculando automáticamente el promedio y dejando disponible la información para padres y estudiantes.",
+  "Actores primarios": "Docente",
+  "Actores secundarios": "Microservicio de Comunicados, Base de Datos de Notas",
+  "Precondiciones": [
+    "El Docente ha iniciado sesión exitosamente.",
+    "El Docente está asignado al curso y sección correspondiente.",
+    "El estudiante está matriculado en el curso."
+  ],
+  "Flujo principal": {
+    "1": "El docente accede al módulo de Notas y selecciona el curso.",
+    "2": "El sistema muestra la lista de estudiantes matriculados en el curso.",
+    "3": "El docente selecciona al estudiante y el periodo de evaluación.",
+    "4": "El docente ingresa la nota correspondiente.",
+    "5": "El sistema (NotasService) valida que la nota esté dentro del rango permitido (0-20).",
+    "6": "El sistema calcula automáticamente el promedio del periodo.",
+    "7": "El sistema guarda la nota en la base de datos.",
+    "8": "El sistema notifica al padre de familia sobre la nueva calificación registrada."
+  },
+  "Postcondiciones": [
+    "La nota queda registrada y asociada al estudiante, curso y periodo.",
+    "El promedio del estudiante se actualiza automáticamente.",
+    "El padre de familia es notificado del nuevo registro."
+  ],
+  "Flujos alternativos": {
+    "A1: Nota fuera de rango": "El sistema rechaza el valor ingresado y muestra un mensaje indicando que la nota debe estar entre 0 y 20.",
+    "A2: Nota ya registrada": "El sistema pregunta al docente si desea sobrescribir la nota existente para ese periodo.",
+    "A3: Estudiante no matriculado en el curso": "El sistema bloquea el registro y muestra un mensaje de error."
+  }
+}
+@endjson

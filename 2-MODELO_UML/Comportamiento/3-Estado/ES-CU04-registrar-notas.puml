@@ -1,0 +1,23 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam stateBackgroundColor #FFD1DC
+skinparam stateBorderColor #C71585
+skinparam arrowColor #C71585
+
+[*] --> SeleccionandoCurso
+SeleccionandoCurso --> ListandoAlumnos : Docente elige curso
+ListandoAlumnos --> SeleccionandoPeriodo : Docente elige alumno
+SeleccionandoPeriodo --> IngresandoNota : Docente elige periodo
+IngresandoNota --> ValidandoRango : Docente ingresa valor
+ValidandoRango --> ErrorRango : Nota fuera de 0-20
+ErrorRango --> IngresandoNota : Corregir valor
+ValidandoRango --> VerificandoExistente : Valor válido
+VerificandoExistente --> ConfirmarSobrescritura : Nota ya existe
+ConfirmarSobrescritura --> GuardandoNota : Docente confirma
+VerificandoExistente --> GuardandoNota : No existe registro previo
+GuardandoNota --> CalculandoPromedio : Nota guardada en BD
+CalculandoPromedio --> NotificandoPadre : Promedio actualizado
+NotificandoPadre --> Finalizado : Notificación enviada
+Finalizado --> [*]
+
+@enduml
