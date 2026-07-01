@@ -1,0 +1,30 @@
+@startuml
+left to right direction
+skinparam backgroundColor #B6E3A6
+
+actor "Director" as director
+actor "Secretaria" as secretaria
+actor "Docente" as docente
+actor "Auxiliar" as auxiliar
+
+package "Sistema SYS COLEGIO EMANUEL" {
+    usecase "Enviar Comunicado y Aviso" as enviar
+    usecase "Autenticar Usuario" as auth
+    usecase "Seleccionar Destinatarios" as destinatarios
+    usecase "Redactar Comunicado" as redactar
+    usecase "Enviar Notificación Push" as push
+    usecase "Registrar Historial" as historial
+}
+
+director --> enviar
+secretaria --> enviar
+docente --> enviar
+auxiliar --> enviar
+
+enviar ..> auth : <<include>>
+enviar ..> destinatarios : <<include>>
+enviar ..> redactar : <<include>>
+enviar ..> push : <<include>>
+enviar ..> historial : <<include>>
+
+@enduml
