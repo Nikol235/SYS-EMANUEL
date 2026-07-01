@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+skinparam backgroundColor #B6E3A6
+
+actor "Auxiliar" as auxiliar
+
+package "Sistema SYS COLEGIO EMANUEL" {
+    usecase "Registrar Asistencia" as registrar
+    usecase "Autenticar Usuario" as auth
+    usecase "Validar Código QR" as validarQR
+    usecase "Clasificar Estado de Asistencia" as clasificar
+    usecase "Notificar al Padre" as notificar
+}
+
+auxiliar --> registrar
+
+registrar ..> auth : <<include>>
+registrar ..> validarQR : <<include>>
+registrar ..> clasificar : <<include>>
+registrar ..> notificar : <<include>>
+
+@enduml

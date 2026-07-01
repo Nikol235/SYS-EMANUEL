@@ -1,0 +1,33 @@
+@startjson
+{
+  "Caso de uso": "Registrar Asistencia",
+  "Id": "CU-02",
+  "Breve descripción": "El sistema permite al Auxiliar registrar el ingreso de los estudiantes mediante el escaneo de un código QR, clasificando automáticamente el estado de puntualidad (temprano, tarde o falta) y notificando a los padres de familia.",
+  "Actores primarios": "Auxiliar",
+  "Actores secundarios": "Microservicio de Comunicados, Base de Datos de Asistencia",
+  "Precondiciones": [
+    "El Auxiliar ha iniciado sesión exitosamente.",
+    "El estudiante está matriculado y cuenta con su código QR generado.",
+    "El horario de ingreso está configurado en el sistema."
+  ],
+  "Flujo principal": {
+    "1": "El auxiliar accede al módulo de Asistencia y activa el escáner QR.",
+    "2": "El estudiante presenta su código QR físico o digital.",
+    "3": "El sistema (AsistenciaService) lee y valida el código QR.",
+    "4": "El sistema compara la hora de registro con el horario configurado.",
+    "5": "El sistema clasifica el estado (Temprano, Tarde o Falta).",
+    "6": "El sistema guarda el registro en la base de datos.",
+    "7": "El sistema (ComunicadosService) envía una notificación push al padre de familia.",
+    "8": "El sistema muestra en pantalla el nombre del alumno y su estado de asistencia."
+  },
+  "Postcondiciones": [
+    "El registro de asistencia queda guardado con hora y estado.",
+    "Se envió una alerta de ingreso al padre de familia."
+  ],
+  "Flujos alternativos": {
+    "A1: QR inválido o ilegible": "El sistema emite una alerta de error y no registra el ingreso, pidiendo reintentar el escaneo.",
+    "A2: Estudiante no matriculado": "Si el QR pertenece a un alumno inactivo, el sistema bloquea el registro y notifica al auxiliar.",
+    "A3: Fallo de red": "El sistema guarda el registro localmente y lo sincroniza con la base de datos cuando se restablece la conexión."
+  }
+}
+@endjson
