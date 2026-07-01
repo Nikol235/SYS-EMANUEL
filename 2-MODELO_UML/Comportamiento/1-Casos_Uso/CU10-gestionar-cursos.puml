@@ -1,0 +1,28 @@
+@startuml
+left to right direction
+skinparam backgroundColor #B6E3A6
+
+actor "Director" as director
+actor "Secretaria" as secretaria
+
+package "Sistema SYS COLEGIO EMANUEL" {
+    usecase "Gestionar Materias y Cursos" as gestionar
+    usecase "Autenticar Usuario" as auth
+    usecase "Crear Curso" as crear
+    usecase "Editar Curso" as editar
+    usecase "Asignar Docente al Curso" as asignar
+    usecase "Desactivar Curso" as desactivar
+    usecase "Validar Duplicado" as validar
+}
+
+director --> gestionar
+secretaria --> gestionar
+
+gestionar ..> auth : <<include>>
+gestionar ..> crear : <<extend>>
+gestionar ..> editar : <<extend>>
+gestionar ..> desactivar : <<extend>>
+gestionar ..> asignar : <<include>>
+gestionar ..> validar : <<include>>
+
+@enduml

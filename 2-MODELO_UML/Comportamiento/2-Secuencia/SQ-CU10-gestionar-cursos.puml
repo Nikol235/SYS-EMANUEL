@@ -1,0 +1,41 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam participantBackgroundColor #FFD1DC
+skinparam participantBorderColor #C71585
+skinparam actorBackgroundColor #FFB6C1
+skinparam actorBorderColor #C71585
+skinparam arrowColor #C71585
+skinparam lifeLineBorderColor #C71585
+
+actor "Director/Secretaria" as user
+participant "App Web" as app
+participant "CursoController" as controller
+participant "CursoService" as service
+participant "BaseDatos" as db
+
+user -> app : Ingresa datos del curso y asigna docente
+activate app
+app -> controller : crearCurso(materia, grado, seccion, idDocente)
+activate controller
+controller -> service : registrarCurso(datos)
+activate service
+service -> db : verificarDuplicado(materia, grado, seccion)
+activate db
+db --> service : duplicado: false
+deactivate db
+service -> db : verificarDisponibilidadDocente(idDocente)
+activate db
+db --> service : disponible: true
+deactivate db
+service -> db : guardarCurso(curso)
+activate db
+db --> service : cursoGuardado
+deactivate db
+service --> controller : retornaCurso(curso)
+deactivate service
+controller --> app : mostrarConfirmacion(curso)
+deactivate controller
+app --> user : Muestra "Curso creado y asignado correctamente"
+deactivate app
+
+@enduml

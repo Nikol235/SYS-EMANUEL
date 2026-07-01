@@ -1,0 +1,33 @@
+@startjson
+{
+  "Caso de uso": "Gestionar Materias y Cursos",
+  "Id": "CU-10",
+  "Breve descripción": "El sistema permite al Director y Secretaria crear, editar, asignar docentes y desactivar materias y cursos del colegio, definiendo grado, sección y docente responsable para cada curso del periodo académico.",
+  "Actores primarios": "Director, Secretaria",
+  "Actores secundarios": "Microservicio de Usuarios, Base de Datos Académica",
+  "Precondiciones": [
+    "El usuario (Director o Secretaria) ha iniciado sesión exitosamente.",
+    "Existen grados y secciones registrados en el sistema.",
+    "Existen docentes activos registrados en el sistema."
+  ],
+  "Flujo principal": {
+    "1": "El usuario accede al módulo de Materias y Cursos.",
+    "2": "El sistema muestra la lista de cursos registrados por grado y sección.",
+    "3": "El usuario elige una acción: Crear, Editar o Desactivar curso.",
+    "4": "Si crea: ingresa nombre de materia, grado y sección.",
+    "5": "El usuario asigna un docente responsable al curso.",
+    "6": "El sistema (CursoService) valida que no exista duplicado de materia en el mismo grado/sección.",
+    "7": "El sistema guarda el curso en la base de datos.",
+    "8": "El sistema confirma la operación exitosa al usuario."
+  },
+  "Postcondiciones": [
+    "El curso queda registrado y visible para el docente asignado.",
+    "Los estudiantes matriculados en ese grado/sección pueden ser asociados al curso."
+  ],
+  "Flujos alternativos": {
+    "A1: Curso duplicado": "El sistema detecta que ya existe esa materia en el mismo grado y sección e informa al usuario para que corrija.",
+    "A2: Docente no disponible": "Si el docente ya tiene el máximo de cursos asignados, el sistema advierte y permite elegir otro.",
+    "A3: Desactivar curso con alumnos": "El sistema advierte que el curso tiene estudiantes matriculados y solicita confirmación antes de desactivar."
+  }
+}
+@endjson

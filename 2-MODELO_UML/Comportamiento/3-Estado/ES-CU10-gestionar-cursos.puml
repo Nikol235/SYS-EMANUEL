@@ -1,0 +1,26 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam stateBackgroundColor #FFD1DC
+skinparam stateBorderColor #C71585
+skinparam arrowColor #C71585
+
+[*] --> ListandoCursos
+ListandoCursos --> SeleccionandoAccion : Usuario elige acción
+SeleccionandoAccion --> IngresandoDatos : Acción = Crear
+SeleccionandoAccion --> EditandoDatos : Acción = Editar
+SeleccionandoAccion --> ConfirmandoDesactivar : Acción = Desactivar
+IngresandoDatos --> AsignandoDocente : Datos de curso completados
+EditandoDatos --> AsignandoDocente : Datos actualizados
+AsignandoDocente --> ValidandoDatos : Docente seleccionado
+ValidandoDatos --> ErrorDuplicado : Curso ya existe en ese grado/sección
+ErrorDuplicado --> IngresandoDatos : Corregir datos
+ValidandoDatos --> ErrorDocente : Docente sin disponibilidad
+ErrorDocente --> AsignandoDocente : Elegir otro docente
+ValidandoDatos --> GuardandoCurso : Validaciones superadas
+ConfirmandoDesactivar --> AdvertenciaAlumnos : Curso tiene alumnos matriculados
+AdvertenciaAlumnos --> GuardandoCurso : Usuario confirma desactivación
+ConfirmandoDesactivar --> GuardandoCurso : Sin alumnos, desactivar directo
+GuardandoCurso --> Finalizado : Curso guardado en BD
+Finalizado --> [*]
+
+@enduml
