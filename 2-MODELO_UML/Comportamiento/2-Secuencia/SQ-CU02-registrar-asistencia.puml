@@ -1,0 +1,46 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam participantBackgroundColor #FFD1DC
+skinparam participantBorderColor #C71585
+skinparam actorBackgroundColor #FFB6C1
+skinparam actorBorderColor #C71585
+skinparam arrowColor #C71585
+skinparam lifeLineBorderColor #C71585
+
+actor "Auxiliar" as aux
+participant "App Web/Móvil" as app
+participant "AsistenciaController" as controller
+participant "AsistenciaService" as service
+participant "BaseDatos" as db
+participant "NotificadorPadres" as notif
+
+aux -> app : Escanea código QR del alumno
+activate app
+app -> controller : enviarQR(datosQR)
+activate controller
+controller -> service : validarQR(datosQR)
+activate service
+service -> db : buscarAlumnoPorQR(datosQR)
+activate db
+db --> service : Retorna datos del Alumno
+deactivate db
+
+service -> service : compararHoraConHorario()
+service -> db : guardarRegistroAsistencia(estado)
+activate db
+db --> service : confirmacionGuardado
+deactivate db
+
+service -> notif : generarAlertaPadre(idAlumno, estado)
+activate notif
+notif --> service : alerta enviada
+deactivate notif
+
+service --> controller : retornaResultado(alumno, estado)
+deactivate service
+controller --> app : mostrarResultado(alumno, estado)
+deactivate controller
+app --> aux : Muestra "Juan Pérez - TEMPRANO"
+deactivate app
+
+@enduml

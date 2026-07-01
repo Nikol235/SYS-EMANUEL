@@ -1,0 +1,23 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam stateBackgroundColor #FFD1DC
+skinparam stateBorderColor #C71585
+skinparam arrowColor #C71585
+
+[*] --> EsperandoEscaneo
+EsperandoEscaneo --> ValidandoQR : Auxiliar escanea código
+ValidandoQR --> ErrorLectura : QR ilegible o dañado
+ErrorLectura --> EsperandoEscaneo : Reintentar escaneo
+ValidandoQR --> VerificandoAlumno : QR válido
+VerificandoAlumno --> Rechazado : Alumno no matriculado o inactivo
+VerificandoAlumno --> ComparandoHorario : Alumno activo
+ComparandoHorario --> EstadoTemprano : Dentro de hora límite
+ComparandoHorario --> EstadoTarde : Después de hora límite
+Rechazado --> [*] : Fin de proceso
+EstadoTemprano --> GuardandoRegistro : Confirmar asistencia
+EstadoTarde --> GuardandoRegistro : Confirmar asistencia
+GuardandoRegistro --> EnviandoNotificacion : Registro guardado en BD
+EnviandoNotificacion --> Finalizado : Alerta enviada al padre
+Finalizado --> [*]
+
+@enduml
