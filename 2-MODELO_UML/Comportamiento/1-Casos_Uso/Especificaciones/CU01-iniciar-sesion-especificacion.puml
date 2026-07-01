@@ -1,0 +1,33 @@
+@startjson
+{
+  "Caso de uso": "Iniciar Sesión",
+  "Id": "CU-01",
+  "Breve descripción": "El sistema permite a cualquier usuario registrado (Director, Secretaria, Docente, Auxiliar, Padre o Estudiante) autenticarse mediante usuario y contraseña, validando sus credenciales y otorgando acceso según su rol.",
+  "Actores primarios": "Director, Secretaria, Docente, Auxiliar, Padre, Estudiante",
+  "Actores secundarios": "Microservicio de Usuarios, Base de Datos de Autenticación",
+  "Precondiciones": [
+    "El usuario debe estar previamente registrado en el sistema.",
+    "El usuario debe contar con un nombre de usuario y contraseña asignados.",
+    "El usuario debe tener su cuenta en estado activo."
+  ],
+  "Flujo principal": {
+    "1": "El usuario accede a la pantalla de inicio de sesión.",
+    "2": "El usuario ingresa su nombre de usuario y contraseña.",
+    "3": "El usuario presiona el botón 'Iniciar Sesión'.",
+    "4": "El sistema (AuthService) valida las credenciales contra la base de datos.",
+    "5": "El sistema verifica que la cuenta esté activa.",
+    "6": "El sistema genera un token de sesión (JWT) con el rol del usuario.",
+    "7": "El sistema redirige al usuario al panel correspondiente según su rol."
+  },
+  "Postcondiciones": [
+    "El usuario queda autenticado en el sistema.",
+    "Se genera un token de sesión válido.",
+    "El usuario accede únicamente a las funciones permitidas para su rol."
+  ],
+  "Flujos alternativos": {
+    "A1: Credenciales incorrectas": "El sistema muestra un mensaje de error indicando que el usuario o contraseña son incorrectos y permite reintentar.",
+    "A2: Cuenta inactiva": "Si la cuenta del usuario está desactivada, el sistema bloquea el acceso y muestra un mensaje indicando que debe contactar al administrador.",
+    "A3: Campos vacíos": "Si el usuario no completa usuario o contraseña, el sistema muestra una alerta solicitando completar los campos obligatorios."
+  }
+}
+@endjson

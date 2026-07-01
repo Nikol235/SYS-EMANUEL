@@ -1,0 +1,28 @@
+@startuml
+left to right direction
+skinparam backgroundColor #B6E3A6
+
+actor "Director" as director
+actor "Secretaria" as secretaria
+actor "Docente" as docente
+actor "Auxiliar" as auxiliar
+actor "Padre" as padre
+actor "Estudiante" as estudiante
+
+package "Sistema SYS COLEGIO EMANUEL" {
+    usecase "Iniciar Sesión" as login
+    usecase "Validar Credenciales" as validar
+    usecase "Generar Token de Sesión" as token
+}
+
+director --> login
+secretaria --> login
+docente --> login
+auxiliar --> login
+padre --> login
+estudiante --> login
+
+login ..> validar : <<include>>
+login ..> token : <<include>>
+
+@enduml
