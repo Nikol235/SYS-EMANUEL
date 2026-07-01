@@ -1,0 +1,32 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam stateBackgroundColor #FFD1DC
+skinparam stateBorderColor #C71585
+skinparam arrowColor #C71585
+
+[*] --> BuscandoEstudiante
+BuscandoEstudiante --> EstudianteNoEncontrado : Sin resultados
+EstudianteNoEncontrado --> BuscandoEstudiante : Reintentar búsqueda
+BuscandoEstudiante --> SeleccionandoTipoConsulta : Estudiante encontrado
+SeleccionandoTipoConsulta --> ConsultandoNotas : Elige Notas
+SeleccionandoTipoConsulta --> ConsultandoBoleta : Elige Boleta
+SeleccionandoTipoConsulta --> ConsultandoHorario : Elige Horario
+SeleccionandoTipoConsulta --> ConsultandoAsistencia : Elige Asistencia
+ConsultandoNotas --> SinRegistros : No hay datos en el periodo
+ConsultandoBoleta --> SinRegistros : No hay datos en el periodo
+ConsultandoAsistencia --> SinRegistros : No hay datos en el periodo
+SinRegistros --> SeleccionandoTipoConsulta : Cambiar consulta
+ConsultandoNotas --> MostrandoResultados : Datos obtenidos
+ConsultandoBoleta --> MostrandoResultados : Datos obtenidos
+ConsultandoHorario --> MostrandoResultados : Datos obtenidos
+ConsultandoAsistencia --> MostrandoResultados : Datos obtenidos
+MostrandoResultados --> EnviandoCorreo : Usuario solicita envío
+EnviandoCorreo --> ErrorCorreo : Fallo en envío
+ErrorCorreo --> MostrandoResultados : Mostrar error
+EnviandoCorreo --> CorreoEnviado : Envío exitoso
+CorreoEnviado --> RegistrandoConsulta : Confirmar envío
+MostrandoResultados --> RegistrandoConsulta : Sin envío de correo
+RegistrandoConsulta --> Finalizado : Consulta registrada
+Finalizado --> [*]
+
+@enduml

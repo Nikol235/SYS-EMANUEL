@@ -1,0 +1,28 @@
+@startuml
+left to right direction
+skinparam backgroundColor #B6E3A6
+
+actor "Padre" as padre
+actor "Docente" as docente
+
+package "Sistema SYS COLEGIO EMANUEL" {
+    usecase "Consultas Académicas" as consultar
+    usecase "Autenticar Usuario" as auth
+    usecase "Consultar Notas" as notas
+    usecase "Consultar Asistencia" as asistencia
+    usecase "Consultar Horario" as horario
+    usecase "Generar Boleta" as boleta
+    usecase "Enviar por Correo" as correo
+}
+
+padre --> consultar
+docente --> consultar
+
+consultar ..> auth : <<include>>
+consultar ..> notas : <<extend>>
+consultar ..> asistencia : <<extend>>
+consultar ..> horario : <<extend>>
+consultar ..> boleta : <<extend>>
+consultar ..> correo : <<extend>>
+
+@enduml
