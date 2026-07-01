@@ -1,0 +1,51 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam participantBackgroundColor #FFD1DC
+skinparam participantBorderColor #C71585
+skinparam actorBackgroundColor #FFB6C1
+skinparam actorBorderColor #C71585
+skinparam arrowColor #C71585
+skinparam lifeLineBorderColor #C71585
+
+actor "Secretaria" as sec
+participant "App Web" as app
+participant "MatriculaController" as controller
+participant "MatriculaService" as service
+participant "BaseDatos" as db
+participant "AsistenciaService" as asistencia
+
+sec -> app : Ingresa datos del estudiante, padre, grado y sección
+activate app
+app -> controller : matricularEstudiante(datosEstudiante, datosPadre, grado, seccion)
+activate controller
+controller -> service : registrarMatricula(datos)
+activate service
+service -> service : validarDocumentos()
+service -> db : verificarVacantes(grado, seccion)
+activate db
+db --> service : vacantes: disponibles
+deactivate db
+service -> db : verificarDuplicado(dni)
+activate db
+db --> service : duplicado: false
+deactivate db
+service -> db : guardarEstudiante(datosEstudiante, idPadre, grado, seccion)
+activate db
+db --> service : idEstudianteGuardado
+deactivate db
+service -> asistencia : generarCodigoQR(idEstudiante)
+activate asistencia
+asistencia --> service : codigoQR
+deactivate asistencia
+service -> db : guardarCodigoQR(idEstudiante, codigoQR)
+activate db
+db --> service : confirmacion
+deactivate db
+service --> controller : retornaMatricula(estudiante, qr)
+deactivate service
+controller --> app : mostrarConfirmacion(estudiante, qr)
+deactivate controller
+app --> sec : Muestra "Matrícula registrada - QR generado"
+deactivate app
+
+@enduml

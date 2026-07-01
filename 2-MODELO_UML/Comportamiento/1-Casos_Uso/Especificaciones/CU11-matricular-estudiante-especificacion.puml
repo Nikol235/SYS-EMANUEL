@@ -1,0 +1,34 @@
+@startjson
+{
+  "Caso de uso": "Matricular Estudiante",
+  "Id": "CU-11",
+  "Breve descripción": "El sistema permite a la Secretaria registrar la matrícula de un nuevo estudiante, capturando sus datos personales, los del padre/apoderado, asignando grado y sección, validando la documentación requerida y generando su código QR de asistencia.",
+  "Actores primarios": "Secretaria",
+  "Actores secundarios": "Padre, Microservicio de Asistencia, Base de Datos Académica",
+  "Precondiciones": [
+    "La Secretaria ha iniciado sesión exitosamente.",
+    "El periodo de matrícula está activo en el sistema.",
+    "Existen vacantes disponibles en el grado y sección solicitados."
+  ],
+  "Flujo principal": {
+    "1": "La Secretaria accede al módulo de Matrícula y selecciona 'Nueva Matrícula'.",
+    "2": "La Secretaria ingresa los datos personales del estudiante (nombre, DNI, fecha de nacimiento).",
+    "3": "La Secretaria registra los datos del padre/apoderado (o vincula uno ya existente).",
+    "4": "La Secretaria selecciona el grado y sección a matricular.",
+    "5": "El sistema (MatriculaService) valida la documentación requerida (partida, DNI, foto).",
+    "6": "El sistema verifica la disponibilidad de vacantes en el grado/sección.",
+    "7": "El sistema genera el código QR único del estudiante para el módulo de Asistencia.",
+    "8": "El sistema guarda la matrícula y confirma el registro a la Secretaria."
+  },
+  "Postcondiciones": [
+    "El estudiante queda matriculado y activo en el grado y sección asignados.",
+    "El código QR del estudiante queda disponible para el registro de asistencia.",
+    "El padre/apoderado queda vinculado al estudiante en el sistema."
+  ],
+  "Flujos alternativos": {
+    "A1: Documentación incompleta": "El sistema no permite finalizar la matrícula y señala los documentos faltantes.",
+    "A2: Sin vacantes disponibles": "El sistema informa que el grado/sección seleccionado no tiene cupos y sugiere otra sección.",
+    "A3: Estudiante ya matriculado": "El sistema detecta un DNI duplicado en el periodo actual y bloquea el registro."
+  }
+}
+@endjson

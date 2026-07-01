@@ -1,0 +1,23 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam stateBackgroundColor #FFD1DC
+skinparam stateBorderColor #C71585
+skinparam arrowColor #C71585
+
+[*] --> IngresandoDatosEstudiante
+IngresandoDatosEstudiante --> IngresandoDatosPadre : Datos del estudiante completados
+IngresandoDatosPadre --> SeleccionandoGradoSeccion : Padre registrado o vinculado
+SeleccionandoGradoSeccion --> SinVacantes : Grado/sección lleno
+SinVacantes --> SeleccionandoGradoSeccion : Elegir otra sección
+SeleccionandoGradoSeccion --> ValidandoDocumentos : Vacante disponible
+ValidandoDocumentos --> DocumentacionIncompleta : Faltan documentos
+DocumentacionIncompleta --> ValidandoDocumentos : Completar documentos
+ValidandoDocumentos --> VerificandoDuplicado : Documentos completos
+VerificandoDuplicado --> MatriculaDuplicada : DNI ya matriculado
+MatriculaDuplicada --> [*] : Bloquear registro
+VerificandoDuplicado --> GuardandoMatricula : Sin duplicados
+GuardandoMatricula --> GenerandoQR : Estudiante guardado en BD
+GenerandoQR --> Finalizado : QR generado y asociado
+Finalizado --> [*]
+
+@enduml
