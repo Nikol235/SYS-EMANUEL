@@ -1,0 +1,22 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam stateBackgroundColor #FFD1DC
+skinparam stateBorderColor #C71585
+skinparam arrowColor #C71585
+
+[*] --> SeleccionandoPeriodo
+SeleccionandoPeriodo --> SinDatos : No hay registros en el periodo
+SinDatos --> SeleccionandoPeriodo : Elegir otro periodo
+SeleccionandoPeriodo --> CalculandoTotales : Periodo con datos
+CalculandoTotales --> MostrandoReporte : Totales calculados
+MostrandoReporte --> FiltrandoDatos : Usuario aplica filtro
+FiltrandoDatos --> MostrandoReporte : Reporte actualizado
+MostrandoReporte --> ConsultandoDeudores : Usuario revisa morosidad
+ConsultandoDeudores --> MostrandoReporte : Volver al reporte
+MostrandoReporte --> ExportandoReporte : Usuario solicita exportar
+ExportandoReporte --> ErrorExportacion : Fallo en generación de archivo
+ErrorExportacion --> ExportandoReporte : Reintentar
+ExportandoReporte --> Finalizado : Archivo generado y descargado
+Finalizado --> [*]
+
+@enduml

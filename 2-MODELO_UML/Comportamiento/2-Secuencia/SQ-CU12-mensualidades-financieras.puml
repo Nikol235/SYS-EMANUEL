@@ -1,0 +1,52 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam participantBackgroundColor #FFD1DC
+skinparam participantBorderColor #C71585
+skinparam actorBackgroundColor #FFB6C1
+skinparam actorBorderColor #C71585
+skinparam arrowColor #C71585
+skinparam lifeLineBorderColor #C71585
+
+actor "Director/Secretaria" as user
+participant "App Web" as app
+participant "FinancieroController" as controller
+participant "FinancieroService" as service
+participant "BaseDatos" as db
+
+user -> app : Selecciona periodo y filtros
+activate app
+app -> controller : generarReporte(periodo, filtros)
+activate controller
+controller -> service : calcularReporte(periodo, filtros)
+activate service
+service -> db : obtenerPagos(periodo, filtros)
+activate db
+db --> service : Lista de pagos registrados
+deactivate db
+service -> db : obtenerDeudores(periodo, filtros)
+activate db
+db --> service : Lista de estudiantes deudores
+deactivate db
+service -> service : calcularTotales(pagos)
+service --> controller : retornaReporte(totales, deudores)
+deactivate service
+controller --> app : mostrarReporte(totales, deudores)
+deactivate controller
+app --> user : Muestra reporte consolidado
+
+opt Usuario solicita exportar
+    user -> app : Presiona "Exportar"
+    app -> controller : exportarReporte(formato)
+    activate controller
+    controller -> service : generarArchivo(formato, datos)
+    activate service
+    service --> controller : archivoGenerado
+    deactivate service
+    controller --> app : descargarArchivo(archivo)
+    deactivate controller
+    app --> user : Muestra "Reporte exportado exitosamente"
+end
+
+deactivate app
+
+@enduml
