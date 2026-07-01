@@ -1,0 +1,44 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam participantBackgroundColor #FFD1DC
+skinparam participantBorderColor #C71585
+skinparam actorBackgroundColor #FFB6C1
+skinparam actorBorderColor #C71585
+skinparam arrowColor #C71585
+skinparam lifeLineBorderColor #C71585
+
+actor "Docente" as doc
+participant "App Web" as app
+participant "NotasController" as controller
+participant "NotasService" as service
+participant "BaseDatos" as db
+participant "NotificadorPadres" as notif
+
+doc -> app : Selecciona curso, alumno y periodo
+activate app
+app -> controller : ingresarNota(idAlumno, periodo, valor)
+activate controller
+controller -> service : registrarNota(idAlumno, periodo, valor)
+activate service
+service -> service : validarRango(valor)
+service -> db : guardarNota(idAlumno, periodo, valor)
+activate db
+db --> service : confirmacionGuardado
+deactivate db
+service -> service : calcularPromedio(idAlumno, periodo)
+service -> db : actualizarPromedio(idAlumno, promedio)
+activate db
+db --> service : confirmacion
+deactivate db
+service -> notif : notificarPadre(idAlumno, nota)
+activate notif
+notif --> service : notificacion enviada
+deactivate notif
+service --> controller : retornaResultado(nota, promedio)
+deactivate service
+controller --> app : mostrarConfirmacion(nota, promedio)
+deactivate controller
+app --> doc : Muestra "Nota registrada - Promedio: 16.5"
+deactivate app
+
+@enduml
