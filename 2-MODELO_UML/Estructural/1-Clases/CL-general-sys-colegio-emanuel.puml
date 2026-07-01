@@ -1,0 +1,347 @@
+@startuml
+title Diagrama de Clases General - SYS COLEGIO EMANUEL
+
+'====================================
+' ENUMS
+'====================================
+enum Rol {
+    DIRECTOR
+    SECRETARIA
+    DOCENTE
+    AUXILIAR
+    PADRE
+    ESTUDIANTE
+}
+
+enum EstadoAsistencia {
+    TEMPRANO
+    TARDE
+    FALTA
+}
+
+enum EstadoPago {
+    PENDIENTE
+    PAGADO
+    VENCIDO
+    EXONERADO
+}
+
+enum EstadoMatricula {
+    ACTIVA
+    RETIRADA
+    TRASLADADA
+}
+
+enum EstadoNotificacion {
+    ENVIADA
+    ENTREGADA
+    FALLIDA
+    PENDIENTE
+}
+
+enum TipoEvento {
+    ASISTENCIA
+    NOTA
+    AVANCE
+    TAREA
+    COMUNICADO
+    MENSUALIDAD
+}
+
+enum EstadoTarea {
+    PENDIENTE
+    ENTREGADA
+    TARDE
+}
+
+enum TipoDestinatario {
+    TODOS
+    GRADO
+    SECCION
+    USUARIO_ESPECIFICO
+}
+
+'====================================
+' CLASE BASE
+'====================================
+abstract class Usuario {
+    - idUsuario: int
+    - nombres: String
+    - apellidos: String
+    - username: String
+    - passwordHash: String
+    - rol: Rol
+    - activo: boolean
+    - fechaCreacion: DateTime
+
+    + login(): boolean
+    + logout(): void
+    + cambiarPassword(): void
+}
+
+class Director {
+    - codigoEmpleado: String
+    + crearUsuario(): void
+    + gestionarCursos(): void
+    + generarReporte(): void
+}
+
+class Secretaria {
+    - codigoEmpleado: String
+    + registrarPago(): void
+    + matricularEstudiante(): void
+    + enviarComunicado(): void
+}
+
+class Docente {
+    - codigoEmpleado: String
+    - especialidad: String
+    + registrarNota(): void
+    + publicarAvance(): void
+    + asignarTarea(): void
+    + enviarAviso(): void
+}
+
+class Auxiliar {
+    - codigoEmpleado: String
+    + registrarAsistencia(): void
+    + enviarAviso(): void
+}
+
+class Padre {
+    - dni: String
+    - telefono: String
+    + consultarAcademico(): void
+    + consultarMensualidad(): void
+}
+
+class Estudiante {
+    - codigoEstudiante: String
+    - dni: String
+    - fechaNacimiento: Date
+    + consultarTareas(): void
+    + consultarNotas(): void
+}
+
+Usuario <|-- Director
+Usuario <|-- Secretaria
+Usuario <|-- Docente
+Usuario <|-- Auxiliar
+Usuario <|-- Padre
+Usuario <|-- Estudiante
+Usuario --> Rol : tiene
+
+'====================================
+' MATRÍCULA
+'====================================
+class Matricula {
+    - idMatricula: int
+    - fechaMatricula: DateTime
+    - grado: String
+    - seccion: String
+    - periodoAcademico: String
+    - estado: EstadoMatricula
+
+    + validarDuplicado(): boolean
+    + generarComprobante(): void
+}
+
+class CodigoQR {
+    - idQR: int
+    - hash: String
+    - fechaGeneracion: Date
+    - activo: boolean
+
+    + generar(): void
+    + validar(): boolean
+}
+
+Secretaria "1" --> "0..*" Matricula : registra
+Matricula "1" --> "1" Estudiante : corresponde a
+Matricula "1" --> "1" Padre : vincula a
+Matricula --> EstadoMatricula : tiene
+Estudiante "1" *-- "1" CodigoQR : posee
+
+'====================================
+' ACADÉMICO
+'====================================
+class Curso {
+    - idCurso: int
+    - nombre: String
+    - grado: String
+    - seccion: String
+    - activo: boolean
+
+    + validarDuplicado(): boolean
+    + listarAlumnos(): List
+}
+
+class Nota {
+    - idNota: int
+    - valor: double
+    - periodo: String
+    - observaciones: String
+    - fechaRegistro: DateTime
+
+    + validarRango(): boolean
+    + calcularPromedio(): double
+}
+
+class AvanceDiario {
+    - idAvance: int
+    - fecha: Date
+    - descripcion: String
+    - fotosUrls: String
+
+    + publicar(): void
+}
+
+class Tarea {
+    - idTarea: int
+    - titulo: String
+    - descripcion: String
+    - fechaEntrega: Date
+
+    + asignar(): void
+    + validarFecha(): boolean
+}
+
+class EntregaTarea {
+    - idEntrega: int
+    - estado: EstadoTarea
+    - fechaEntrega: DateTime
+    - observaciones: String
+
+    + registrarEntrega(): void
+}
+
+Docente "1" --> "0..*" Curso : enseña
+Director "1" --> "0..*" Curso : administra
+Curso "1" --> "0..*" Nota : evalua
+Docente "1" --> "0..*" Nota : registra
+Estudiante "1" --> "0..*" Nota : obtiene
+Docente "1" --> "0..*" AvanceDiario : publica
+Curso "1" --> "0..*" AvanceDiario : tiene
+Docente "1" --> "0..*" Tarea : crea
+Curso "1" --> "0..*" Tarea : asigna
+Tarea "1" --> "0..*" EntregaTarea : recibe
+Estudiante "1" --> "0..*" EntregaTarea : realiza
+EntregaTarea --> EstadoTarea : tiene
+
+'====================================
+' ASISTENCIA
+'====================================
+class RegistroAsistencia {
+    - idAsistencia: int
+    - fecha: Date
+    - horaRegistro: DateTime
+    - estado: EstadoAsistencia
+
+    + calcularEstado(): void
+    + guardar(): void
+}
+
+Auxiliar "1" --> "0..*" RegistroAsistencia : registra
+Estudiante "1" --> "0..*" RegistroAsistencia : genera
+RegistroAsistencia --> EstadoAsistencia : clasificado como
+
+'====================================
+' FINANCIERO
+'====================================
+class Mensualidad {
+    - idMensualidad: int
+    - mes: String
+    - anio: int
+    - montoTotal: double
+    - estado: EstadoPago
+    - fechaVencimiento: Date
+
+    + verificarEstado(): EstadoPago
+    + marcarPagado(): void
+}
+
+class Pago {
+    - idPago: int
+    - numeroComprobante: String
+    - montoPagado: double
+    - metodoPago: String
+    - fechaPago: DateTime
+
+    + generarComprobante(): String
+    + validarMonto(): boolean
+}
+
+class ReporteFinanciero {
+    - idReporte: int
+    - periodo: String
+    - totalPagado: double
+    - totalPendiente: double
+    - totalVencido: double
+    - fechaGeneracion: DateTime
+
+    + generar(): void
+    + exportar(): void
+}
+
+Estudiante "1" --> "0..*" Mensualidad : tiene
+Mensualidad "1" --> "0..1" Pago : cancelada con
+Mensualidad --> EstadoPago : tiene
+Secretaria "1" --> "0..*" Pago : registra
+Director "1" --> "0..*" ReporteFinanciero : genera
+Secretaria "1" --> "0..*" ReporteFinanciero : genera
+
+'====================================
+' COMUNICADOS Y NOTIFICACIONES
+'====================================
+class Comunicado {
+    - idComunicado: int
+    - asunto: String
+    - cuerpo: String
+    - fechaEnvio: DateTime
+    - tipoDestinatario: TipoDestinatario
+
+    + validar(): boolean
+    + enviar(): void
+}
+
+class Notificacion {
+    - idNotificacion: int
+    - titulo: String
+    - cuerpo: String
+    - tipoEvento: TipoEvento
+    - estado: EstadoNotificacion
+    - fechaEnvio: DateTime
+
+    + marcarEntregada(): void
+    + marcarFallida(): void
+}
+
+class TokenDispositivo {
+    - idToken: int
+    - tokenFCM: String
+    - activo: boolean
+    - fechaRegistro: DateTime
+
+    + registrar(): void
+    + invalidar(): void
+}
+
+class Sesion {
+    - idSesion: int
+    - token: String
+    - fechaInicio: DateTime
+    - fechaExpiracion: DateTime
+
+    + generar(): String
+    + validar(): boolean
+    + cerrar(): void
+}
+
+Usuario "1" --> "0..*" Comunicado : redacta
+Comunicado "1" --> "0..*" Notificacion : genera
+Usuario "1" --> "0..*" Notificacion : recibe
+Usuario "1" --> "0..*" TokenDispositivo : registra
+Usuario "1" --> "0..*" Sesion : genera
+Padre "1" --> "0..*" Estudiante : es apoderado de
+
+@enduml
