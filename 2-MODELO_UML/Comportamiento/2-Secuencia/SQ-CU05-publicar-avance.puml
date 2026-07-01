@@ -1,0 +1,39 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam participantBackgroundColor #FFD1DC
+skinparam participantBorderColor #C71585
+skinparam actorBackgroundColor #FFB6C1
+skinparam actorBorderColor #C71585
+skinparam arrowColor #C71585
+skinparam lifeLineBorderColor #C71585
+
+actor "Docente" as doc
+participant "App Web" as app
+participant "AvanceController" as controller
+participant "AvanceService" as service
+participant "BaseDatos" as db
+participant "NotificadorPadres" as notif
+
+doc -> app : Selecciona curso y sube foto de la clase
+activate app
+app -> controller : publicarAvance(idCurso, fotos, descripcion)
+activate controller
+controller -> service : registrarAvance(idCurso, fotos, descripcion)
+activate service
+service -> service : validarDatos()
+service -> db : guardarAvance(idCurso, fotos, descripcion)
+activate db
+db --> service : confirmacionGuardado
+deactivate db
+service -> notif : notificarPadres(idCurso, "Nuevo avance publicado")
+activate notif
+notif --> service : notificacion enviada
+deactivate notif
+service --> controller : retornaResultado(avance)
+deactivate service
+controller --> app : mostrarConfirmacion()
+deactivate controller
+app --> doc : Muestra "Avance publicado correctamente"
+deactivate app
+
+@enduml

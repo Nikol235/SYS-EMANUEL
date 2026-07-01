@@ -1,0 +1,32 @@
+@startjson
+{
+  "Caso de uso": "Publicar Avance y Asignar Tareas",
+  "Id": "CU-05",
+  "Breve descripción": "El sistema permite al Docente publicar evidencias fotográficas del avance de clase y asignar tareas con fecha de entrega para un curso específico, quedando disponibles para que padres y estudiantes las visualicen.",
+  "Actores primarios": "Docente",
+  "Actores secundarios": "Microservicio de Almacenamiento, Microservicio de Comunicados",
+  "Precondiciones": [
+    "El Docente ha iniciado sesión exitosamente.",
+    "El Docente está asignado al curso y sección correspondiente."
+  ],
+  "Flujo principal": {
+    "1": "El docente accede al módulo de Avance y selecciona el curso.",
+    "2": "El docente elige entre 'Publicar Avance' o 'Asignar Tarea'.",
+    "3": "Si publica avance: sube una o más fotos con una descripción del día.",
+    "4": "Si asigna tarea: ingresa título, descripción y fecha de entrega.",
+    "5": "El sistema (AvanceService) valida los datos ingresados.",
+    "6": "El sistema almacena las fotos o la tarea en la base de datos.",
+    "7": "El sistema notifica a los padres de familia sobre la nueva publicación.",
+    "8": "El sistema confirma la publicación exitosa al docente."
+  },
+  "Postcondiciones": [
+    "El avance o tarea queda visible para padres y estudiantes del curso.",
+    "Se generó una notificación a los padres de familia."
+  ],
+  "Flujos alternativos": {
+    "A1: Error al subir foto": "El sistema muestra un mensaje de error y permite reintentar la carga de la imagen.",
+    "A2: Fecha de entrega inválida": "Si la fecha de entrega es anterior a la fecha actual, el sistema rechaza el registro y solicita corregirla.",
+    "A3: Curso sin alumnos matriculados": "El sistema advierte que el curso no tiene estudiantes asociados antes de publicar."
+  }
+}
+@endjson
