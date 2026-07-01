@@ -1,0 +1,38 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam participantBackgroundColor #FFD1DC
+skinparam participantBorderColor #C71585
+skinparam actorBackgroundColor #FFB6C1
+skinparam actorBorderColor #C71585
+skinparam arrowColor #C71585
+skinparam lifeLineBorderColor #C71585
+
+actor "Usuario" as user
+participant "App Web/Móvil" as app
+participant "AuthController" as controller
+participant "AuthService" as service
+participant "BaseDatos" as db
+
+user -> app : Ingresa usuario y contraseña
+activate app
+app -> controller : login(username, password)
+activate controller
+controller -> service : validarCredenciales(username, password)
+activate service
+service -> db : buscarUsuario(username)
+activate db
+db --> service : Retorna datos del usuario
+deactivate db
+
+service -> service : verificarPasswordHash()
+service -> service : verificarCuentaActiva()
+service -> service : generarTokenJWT(rol)
+
+service --> controller : retornaToken(token, rol)
+deactivate service
+controller --> app : sesionIniciada(token, rol)
+deactivate controller
+app --> user : Redirige al panel según su rol
+deactivate app
+
+@enduml

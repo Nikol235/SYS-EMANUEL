@@ -1,0 +1,21 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam stateBackgroundColor #FFD1DC
+skinparam stateBorderColor #C71585
+skinparam arrowColor #C71585
+
+[*] --> PantallaLogin
+PantallaLogin --> ValidandoCampos : Usuario presiona "Iniciar Sesión"
+ValidandoCampos --> CamposIncompletos : Faltan datos
+CamposIncompletos --> PantallaLogin : Reintentar
+ValidandoCampos --> VerificandoCredenciales : Campos completos
+VerificandoCredenciales --> CredencialesInvalidas : Usuario o contraseña incorrectos
+CredencialesInvalidas --> PantallaLogin : Reintentar
+VerificandoCredenciales --> VerificandoEstado : Credenciales correctas
+VerificandoEstado --> CuentaInactiva : Cuenta desactivada
+CuentaInactiva --> [*] : Fin de proceso
+VerificandoEstado --> GenerandoToken : Cuenta activa
+GenerandoToken --> SesionIniciada : Token generado correctamente
+SesionIniciada --> [*]
+
+@enduml
