@@ -1,0 +1,23 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam stateBackgroundColor #FFD1DC
+skinparam stateBorderColor #C71585
+skinparam arrowColor #C71585
+
+[*] --> SeleccionandoCurso
+SeleccionandoCurso --> EligiendoTipo : Docente elige el curso
+EligiendoTipo --> SubiendoFotos : Elige "Publicar Avance"
+EligiendoTipo --> IngresandoDatosTarea : Elige "Asignar Tarea"
+SubiendoFotos --> ErrorCarga : Falla la subida
+ErrorCarga --> SubiendoFotos : Reintentar carga
+SubiendoFotos --> GuardandoAvance : Fotos cargadas correctamente
+GuardandoAvance --> NotificandoPadres : Avance guardado en BD
+NotificandoPadres --> Finalizado : Notificación enviada
+IngresandoDatosTarea --> ValidandoFecha : Docente ingresa fecha de entrega
+ValidandoFecha --> ErrorFecha : Fecha inválida
+ErrorFecha --> IngresandoDatosTarea : Corregir fecha
+ValidandoFecha --> GuardandoTarea : Fecha válida
+GuardandoTarea --> NotificandoPadres : Tarea guardada en BD
+Finalizado --> [*]
+
+@enduml
