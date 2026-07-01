@@ -1,0 +1,32 @@
+@startjson
+{
+  "Caso de uso": "Enviar Comunicado y Aviso",
+  "Id": "CU-06",
+  "Breve descripción": "El sistema permite al Director, Secretaria, Docente o Auxiliar redactar y enviar comunicados o avisos a grupos específicos (todos los padres, un grado, una sección o un usuario en particular), con notificación push y registro en el historial.",
+  "Actores primarios": "Director, Secretaria, Docente, Auxiliar",
+  "Actores secundarios": "Microservicio de Comunicados, Base de Datos de Mensajes",
+  "Precondiciones": [
+    "El usuario ha iniciado sesión exitosamente.",
+    "Existe al menos un destinatario registrado y activo en el sistema."
+  ],
+  "Flujo principal": {
+    "1": "El usuario accede al módulo de Comunicados y selecciona 'Nuevo Comunicado'.",
+    "2": "El usuario elige el tipo de destinatario: Todos, Grado, Sección o Usuario específico.",
+    "3": "El usuario redacta el asunto y el cuerpo del comunicado.",
+    "4": "El usuario presiona 'Enviar'.",
+    "5": "El sistema (ComunicadosService) valida los datos y la existencia de destinatarios.",
+    "6": "El sistema guarda el comunicado en la base de datos.",
+    "7": "El sistema envía una notificación push a todos los destinatarios.",
+    "8": "El sistema confirma el envío exitoso al remitente."
+  },
+  "Postcondiciones": [
+    "El comunicado queda registrado en el historial con fecha, remitente y destinatarios.",
+    "Los destinatarios reciben la notificación push en su dispositivo."
+  ],
+  "Flujos alternativos": {
+    "A1: Sin destinatarios disponibles": "El sistema advierte que no hay usuarios activos para el grupo seleccionado y cancela el envío.",
+    "A2: Fallo en el servicio de notificaciones": "El comunicado se guarda correctamente pero se informa al remitente que la notificación push no pudo entregarse.",
+    "A3: Campos obligatorios vacíos": "El sistema muestra validaciones en los campos vacíos y no permite enviar hasta completarlos."
+  }
+}
+@endjson
