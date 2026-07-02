@@ -1,0 +1,33 @@
+@startjson
+{
+  "Caso de uso": "Consultas Académicas",
+  "Id": "CU-08",
+  "Breve descripción": "El sistema permite al Padre y Docente consultar notas, boletas de calificaciones, horarios de clases y asistencia del alumno, además de enviar resultados por correo electrónico y registrar cada consulta realizada.",
+  "Actores primarios": "Padre, Docente",
+  "Actores secundarios": "Microservicio de Notas, Microservicio de Asistencia, Servicio de Correo",
+  "Precondiciones": [
+    "El usuario (Padre o Docente) ha iniciado sesión exitosamente.",
+    "El estudiante consultado está matriculado y activo en el sistema.",
+    "Existen registros de notas y asistencia en el periodo consultado."
+  ],
+  "Flujo principal": {
+    "1": "El usuario accede al módulo de Consultas Académicas.",
+    "2": "El usuario busca al estudiante por nombre o código.",
+    "3": "El usuario selecciona el tipo de consulta: Notas, Boleta, Horario o Asistencia.",
+    "4": "El sistema (ConsultaService) obtiene la información solicitada.",
+    "5": "El sistema muestra los resultados en pantalla.",
+    "6": "Opcionalmente, el usuario solicita enviar los resultados por correo electrónico.",
+    "7": "El sistema registra la consulta realizada en el historial."
+  },
+  "Postcondiciones": [
+    "El usuario visualiza la información académica solicitada.",
+    "Si se solicitó, el correo con los resultados fue enviado exitosamente.",
+    "La consulta queda registrada en el historial del sistema."
+  ],
+  "Flujos alternativos": {
+    "A1: Sin registros en el periodo": "El sistema informa que no existen datos registrados para el periodo seleccionado.",
+    "A2: Error al enviar correo": "El sistema muestra los resultados en pantalla pero notifica que el correo no pudo ser enviado.",
+    "A3: Estudiante no encontrado": "El sistema informa que no existe un estudiante con el criterio de búsqueda ingresado."
+  }
+}
+@endjson

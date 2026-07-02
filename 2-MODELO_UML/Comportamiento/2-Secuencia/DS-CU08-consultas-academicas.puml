@@ -1,0 +1,56 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam participantBackgroundColor #FFD1DC
+skinparam participantBorderColor #C71585
+skinparam actorBackgroundColor #FFB6C1
+skinparam actorBorderColor #C71585
+skinparam arrowColor #C71585
+skinparam lifeLineBorderColor #C71585
+
+actor "Padre/Docente" as user
+participant "App Web/Móvil" as app
+participant "ConsultaController" as controller
+participant "ConsultaService" as service
+participant "BaseDatos" as db
+participant "ServicioCorreo" as correo
+
+user -> app : Selecciona estudiante y tipo de consulta
+activate app
+app -> controller : realizarConsulta(idEstudiante, tipoConsulta, periodo)
+activate controller
+controller -> service : obtenerInformacion(idEstudiante, tipoConsulta, periodo)
+activate service
+service -> db : buscarEstudiante(idEstudiante)
+activate db
+db --> service : datosEstudiante
+deactivate db
+service -> db : obtenerDatos(tipoConsulta, idEstudiante, periodo)
+activate db
+db --> service : resultados
+deactivate db
+service -> db : registrarConsulta(idUsuario, tipoConsulta)
+activate db
+db --> service : registrado
+deactivate db
+service --> controller : retornaResultados(datos)
+deactivate service
+controller --> app : mostrarResultados(datos)
+deactivate controller
+app --> user : Visualiza notas / asistencia / horario / boleta
+
+opt Usuario solicita envío por correo
+    user -> app : Presiona "Enviar por correo"
+    app -> controller : enviarCorreo(idEstudiante, tipoConsulta)
+    activate controller
+    controller -> correo : enviar(email, resultados)
+    activate correo
+    correo --> controller : enviado
+    deactivate correo
+    controller --> app : confirmarEnvio()
+    deactivate controller
+    app --> user : Muestra "Correo enviado exitosamente"
+end
+
+deactivate app
+
+@enduml
