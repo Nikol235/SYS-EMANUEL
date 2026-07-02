@@ -1,0 +1,25 @@
+@startuml
+skinparam backgroundColor #FFF0F5
+skinparam stateBackgroundColor #FFD1DC
+skinparam stateBorderColor #C71585
+skinparam arrowColor #C71585
+
+[*] --> EventoDetectado
+EventoDetectado --> ObteniendoTokens : Sistema detecta evento disparador
+ObteniendoTokens --> SinTokensActivos : No hay tokens válidos
+SinTokensActivos --> [*] : Finalizar sin envío
+ObteniendoTokens --> EnviandoPush : Tokens obtenidos
+EnviandoPush --> TokenInvalido : Token FCM expirado
+TokenInvalido --> InvalidandoToken : Marcar token inactivo
+InvalidandoToken --> EnviandoPush : Continuar con siguiente token
+EnviandoPush --> DispositivoOffline : Sin conexión en dispositivo
+DispositivoOffline --> ColaPendiente : FCM encola con TTL
+ColaPendiente --> EntregadaAlReconectar : Dispositivo se reconecta
+EnviandoPush --> NotificacionEntregada : Entrega confirmada por FCM
+NotificacionEntregada --> RegistrandoHistorial : Actualizar estado en BD
+ColaPendiente --> RegistrandoHistorial : Registrar como pendiente
+InvalidandoToken --> RegistrandoHistorial : Registrar fallo
+RegistrandoHistorial --> Finalizado : Historial guardado
+Finalizado --> [*]
+
+@enduml
