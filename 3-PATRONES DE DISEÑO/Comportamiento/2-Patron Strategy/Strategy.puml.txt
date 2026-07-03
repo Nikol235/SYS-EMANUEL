@@ -1,0 +1,38 @@
+@startuml
+title Patrón Strategy - SYS COLEGIO EMANUEL
+
+interface EstrategiaNotificacion {
+    + enviar(destinatario: String, mensaje: String): void
+}
+
+class NotificacionPush {
+    + enviar(destinatario: String, mensaje: String): void
+}
+
+class NotificacionSMS {
+    + enviar(destinatario: String, mensaje: String): void
+}
+
+class NotificacionEmail {
+    + enviar(destinatario: String, mensaje: String): void
+}
+
+class GestorComunicados {
+    - estrategia: EstrategiaNotificacion
+    + setEstrategia(estrategia: EstrategiaNotificacion): void
+    + enviarComunicado(destinatario: String, mensaje: String): void
+}
+
+EstrategiaNotificacion <|.. NotificacionPush : implementa
+EstrategiaNotificacion <|.. NotificacionSMS : implementa
+EstrategiaNotificacion <|.. NotificacionEmail : implementa
+GestorComunicados --> EstrategiaNotificacion : usa
+
+note bottom of GestorComunicados
+  El Director o Secretaria puede elegir
+  en tiempo de ejecución cómo enviar
+  los comunicados: Push, SMS o Email,
+  sin cambiar el código del gestor.
+end note
+
+@enduml
