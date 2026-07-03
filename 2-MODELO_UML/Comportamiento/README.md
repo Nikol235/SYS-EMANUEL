@@ -1,78 +1,114 @@
-\# Modelo UML - Comportamiento - SYS COLEGIO EMANUEL
+\# SISTEMA DE GESTIÓN EDUCATIVA - SYS COLEGIO EMANUEL
 
 
 
-Esta carpeta contiene los diagramas de comportamiento del sistema SYS COLEGIO EMANUEL, organizados por tipo de diagrama.
+Documentación del sistema de gestión académica y administrativa para el Colegio Emanuel.
 
 
 
-\## Estructura
+\## Tecnologías
+
+\- Java
+
+\- Maven
+
+\- PlantUML
+
+\- Arquitectura Monolítica en Capas
 
 
 
-\### 1-Casos\_Uso
+\## Modelado
 
-Diagramas de casos de uso para cada funcionalidad del sistema (CU01 al CU12), junto con sus especificaciones en formato JSON.
+\- UML
 
+\- Casos de uso
 
+\- Diagramas de secuencia
 
-\### 2-Secuencia
+\- Diagramas de estado
 
-Diagramas de secuencia que describen el flujo de mensajes entre los actores y los componentes del sistema para cada caso de uso.
-
-
-
-\### 3-Estado
-
-Diagramas de estado que muestran los estados posibles y las transiciones de cada proceso del sistema.
+\- Diagrama de clases general
 
 
 
-\## Ejemplos de Diagramas de Comportamiento
+\## Casos de Uso
 
 
 
-\### Diagrama de Caso de Uso (Ejemplo CU01)
+\### CU01 - Iniciar Sesión
 
 !\[CU01](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU01-iniciar-sesion.puml)
 
 
 
-\### Diagrama de Secuencia (Ejemplo CU01)
+\### CU02 - Registrar Asistencia
 
-!\[SQ-CU01](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/2-Secuencia/SQ-CU01-iniciar-sesion.puml)
-
-
-
-\## Casos de Uso documentados
+!\[CU02](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU02-registrar-asistencia.puml)
 
 
 
-| ID | Nombre | Actor Principal |
+\### CU03 - Pago de Mensualidad
 
-|---|---|---|
+!\[CU03](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU03-pago-mensualidad.puml)
 
-| CU-01 | Iniciar Sesión | Todos los usuarios |
 
-| CU-02 | Registrar Asistencia | Auxiliar |
 
-| CU-03 | Pago de Mensualidad | Secretaria |
+\### CU04 - Registrar Notas
 
-| CU-04 | Registrar Notas | Docente |
+!\[CU04](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU04-registrar-notas.puml)
 
-| CU-05 | Publicar Avance y Tareas | Docente |
 
-| CU-06 | Enviar Comunicado | Director, Secretaria, Docente, Auxiliar |
 
-| CU-07 | Gestionar Usuarios y Roles | Director |
+\### CU05 - Publicar Avance y Tareas
 
-| CU-08 | Consultas Académicas | Padre, Docente |
+!\[CU05](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU05-publicar-avance.puml)
 
-| CU-09 | Notificaciones Push | Padre, Docente, Estudiante |
 
-| CU-10 | Gestionar Materias y Cursos | Director, Secretaria |
 
-| CU-11 | Matricular Estudiante | Secretaria |
+\### CU06 - Enviar Comunicado
 
-| CU-12 | Mensualidades Financieras | Director, Secretaria |
+!\[CU06](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU06-enviar-comunicado.puml)
+
+
+
+\### CU07 - Gestionar Usuarios y Roles
+
+!\[CU07](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU07-gestionar-usuarios-roles.puml)
+
+
+
+\### CU08 - Consultas Académicas
+
+!\[CU08](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU08-consultas-academicas.puml)
+
+
+
+\### CU09 - Notificaciones Push
+
+!\[CU09](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU09-recibir-notificaciones-push.puml)
+
+
+
+\### CU10 - Gestionar Materias y Cursos
+
+!\[CU10](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU10-gestionar-cursos.puml)
+
+
+
+\### CU11 - Matricular Estudiante
+
+!\[CU11](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU11-matricular-estudiante.puml)
+
+
+
+\### CU12 - Mensualidades Financieras
+
+!\[CU12](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU12-mensualidades-financieras.puml)
+
+
+
+\## Diagrama de Clases General - SYS COLEGIO EMANUEL
+
+!\[Diagrama de Clases](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Estructura/DC-Diagram
 
