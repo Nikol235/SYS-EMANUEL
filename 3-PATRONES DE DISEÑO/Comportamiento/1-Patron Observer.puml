@@ -1,0 +1,51 @@
+@startuml
+title Patrón Observer - SYS COLEGIO EMANUEL
+
+interface Observador {
+    + actualizar(evento: String, datos: String): void
+}
+
+interface Sujeto {
+    + agregarObservador(obs: Observador): void
+    + eliminarObservador(obs: Observador): void
+    + notificarObservadores(evento: String, datos: String): void
+}
+
+class GestorAsistencia {
+    - observadores: List<Observador>
+    + agregarObservador(obs: Observador): void
+    + eliminarObservador(obs: Observador): void
+    + notificarObservadores(evento: String, datos: String): void
+    + registrarAsistencia(alumno: String, estado: String): void
+}
+
+class NotificadorPadre {
+    - nombrePadre: String
+    + actualizar(evento: String, datos: String): void
+    + enviarPush(mensaje: String): void
+}
+
+class RegistroAuditoria {
+    + actualizar(evento: String, datos: String): void
+    + guardarLog(evento: String, datos: String): void
+}
+
+class PanelDirector {
+    + actualizar(evento: String, datos: String): void
+    + actualizarDashboard(datos: String): void
+}
+
+Sujeto <|.. GestorAsistencia : implementa
+Observador <|.. NotificadorPadre : implementa
+Observador <|.. RegistroAuditoria : implementa
+Observador <|.. PanelDirector : implementa
+GestorAsistencia "1" --> "0..*" Observador : notifica
+
+note bottom of GestorAsistencia
+  Cuando el Auxiliar registra una asistencia,
+  el GestorAsistencia notifica automáticamente
+  a todos los observadores suscritos:
+  padres, auditoría y panel del director.
+end note
+
+@enduml
