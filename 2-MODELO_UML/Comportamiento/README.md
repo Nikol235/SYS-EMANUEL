@@ -2,9 +2,7 @@
 
 
 
-Esta carpeta contiene los diagramas de comportamiento del sistema SYS COLEGIO EMANUEL,
-
-organizados por tipo de diagrama.
+Esta carpeta contiene los diagramas de comportamiento del sistema SYS COLEGIO EMANUEL, organizados por tipo de diagrama.
 
 
 
@@ -14,25 +12,35 @@ organizados por tipo de diagrama.
 
 \### 1-Casos\_Uso
 
-Diagramas de casos de uso para cada funcionalidad del sistema (CU01 al CU12),
-
-junto con sus especificaciones en formato JSON.
+Diagramas de casos de uso para cada funcionalidad del sistema (CU01 al CU12), junto con sus especificaciones en formato JSON.
 
 
 
 \### 2-Secuencia
 
-Diagramas de secuencia que describen el flujo de mensajes entre los actores
-
-y los componentes del sistema para cada caso de uso.
+Diagramas de secuencia que describen el flujo de mensajes entre los actores y los componentes del sistema para cada caso de uso.
 
 
 
 \### 3-Estado
 
-Diagramas de estado que muestran los estados posibles y las transiciones
+Diagramas de estado que muestran los estados posibles y las transiciones de cada proceso del sistema.
 
-de cada proceso del sistema.
+
+
+\## Ejemplos de Diagramas de Comportamiento
+
+
+
+\### Diagrama de Caso de Uso (Ejemplo CU01)
+
+!\[CU01](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU01-iniciar-sesion.puml)
+
+
+
+\### Diagrama de Secuencia (Ejemplo CU01)
+
+!\[SQ-CU01](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/2-Secuencia/SQ-CU01-iniciar-sesion.puml)
 
 
 
