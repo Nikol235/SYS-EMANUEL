@@ -62,7 +62,7 @@ Documentación del sistema de gestión académica y administrativa para el Coleg
 
 \### CU05 - Publicar Avance y Tareas
 
-!\[CU05](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU05-publicar-avance-tareas.puml)
+!\[CU05](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU05-publicar-avance.puml)
 
 
 
@@ -86,13 +86,13 @@ Documentación del sistema de gestión académica y administrativa para el Coleg
 
 \### CU09 - Notificaciones Push
 
-!\[CU09](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU09-notificaciones-push.puml)
+!\[CU09](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU09-recibir-notificaciones-push.puml)
 
 
 
 \### CU10 - Gestionar Materias y Cursos
 
-!\[CU10](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU10-gestionar-materias-cursos.puml)
+!\[CU10](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU10-gestionar-cursos.puml)
 
 
 
