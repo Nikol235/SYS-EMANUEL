@@ -1,146 +1,84 @@
-\# ADR 001: Uso de Arquitectura Monolítica en Capas para el Sistema SYS COLEGIO EMANUEL
-
-
-
-\## Estado
-
-Aceptado
-
-
-
-\## Fecha
-
-2026-07-01
-
-
-
-\## Contexto
-
-El sistema SYS COLEGIO EMANUEL es un sistema de gestión educativa que centraliza 
-
-los procesos académicos y administrativos del Colegio Emanuel. El sistema debe 
-
-gestionar módulos de asistencia, notas, mensualidades, comunicados, avance 
-
-académico, matrícula y consultas académicas para seis tipos de usuarios: 
-
-Director, Secretaria, Docente, Auxiliar, Padre de familia y Estudiante.
-
-
-
-Se evaluaron dos enfoques arquitectónicos para el desarrollo del sistema:
-
-
-
-1\. \*\*Arquitectura de Microservicios:\*\* Alta escalabilidad y autonomía de 
-
-despliegue, pero con mayor complejidad de implementación, mayor curva de 
-
-aprendizaje para el equipo y overhead de comunicación entre servicios.
-
-
-
-2\. \*\*Arquitectura Monolítica en Capas (Layered Architecture):\*\* Desarrollo 
-
-unificado con separación clara de responsabilidades en capas (Presentación, 
-
-Negocio, Persistencia), más adecuado para el tamaño y alcance del sistema 
-
-educativo del Colegio Emanuel.
-
-
-
-\## Decisión
-
-Hemos decidido adoptar la \*\*Arquitectura Monolítica en Capas\*\* para el desarrollo 
-
-del sistema SYS COLEGIO EMANUEL.
-
-
-
-La estructura interna del sistema se dividirá en:
-
-
-
-\* \*\*Capa de Presentación (Controller):\*\* Expone los endpoints REST que reciben 
-
-las solicitudes de la aplicación web y móvil. Gestiona la validación de entrada 
-
-y la respuesta al cliente.
-
-
-
-\* \*\*Capa de Negocio (Service):\*\* Contiene toda la lógica de negocio del sistema 
-
-educativo (cálculo de promedios, clasificación de asistencia, generación de 
-
-comprobantes de pago, etc.). Es independiente de la tecnología de persistencia.
-
-
-
-\* \*\*Capa de Persistencia (Repository):\*\* Gestiona el acceso a la base de datos 
-
-única del sistema mediante el uso de JPA/Hibernate, garantizando la integridad 
-
-referencial entre entidades como Estudiante, Curso, Nota, Pago, etc.
-
-
-
-\* \*\*Capa de Dominio (Model/Entity):\*\* Define las entidades del sistema 
-
-(Usuario, Estudiante, Matricula, Nota, Asistencia, Pago, Comunicado, etc.) 
-
-y sus relaciones.
-
-
-
-\## Consecuencias
-
-
-
-\### Positivas (Beneficios)
-
-\* \*\*Simplicidad de Desarrollo:\*\* Un único proyecto, una única base de datos y 
-
-un único despliegue. Reduce la complejidad operativa para un equipo pequeño.
-
-\* \*\*Transacciones Consistentes:\*\* Al compartir una sola base de datos, las 
-
-operaciones que involucran múltiples módulos (como registrar un pago y 
-
-actualizar el estado financiero del estudiante) se ejecutan en una sola 
-
-transacción ACID.
-
-\* \*\*Curva de Aprendizaje Reducida:\*\* El equipo trabaja con un único framework 
-
-(Spring Boot) y un único modelo de datos, sin necesidad de gestionar 
-
-comunicación entre servicios distribuidos.
-
-\* \*\*Facilidad de Pruebas:\*\* Las pruebas de integración son más directas al 
-
-no requerir mocks de servicios externos.
-
-
-
-\### Negativas (Compensaciones / Trade-offs)
-
-\* \*\*Escalabilidad Limitada:\*\* Si un módulo específico (como asistencia QR) 
-
-requiere más recursos, no puede escalarse de forma independiente; debe 
-
-escalar todo el sistema.
-
-\* \*\*Riesgo de Acoplamiento:\*\* Si no se mantiene la separación de capas de 
-
-forma disciplinada, los módulos pueden volverse dependientes entre sí, 
-
-dificultando el mantenimiento futuro.
-
-\* \*\*Despliegue Conjunto:\*\* Cualquier cambio en cualquier módulo requiere 
-
-redesplegar todo el sistema, lo que puede generar interrupciones en todos 
-
-los módulos simultáneamente.
-
+ADR 001: Uso de Arquitectura Monolítica en Capas - SYS COLEGIO EMANUEL
+Estado: AceptadoFecha: 2026-07-01Autor: Equipo de Desarrollo
+
+Contexto
+El sistema SYS COLEGIO EMANUEL centraliza los procesos académicos y administrativos del Colegio Emanuel. Gestiona los siguientes módulos:
+
+Asistencia: Registro y control de asistencia
+Notas: Gestión de calificaciones
+Mensualidades: Control de pagos
+Comunicados: Envío de notificaciones
+Avance Académico: Seguimiento del progreso
+Matrícula: Proceso de inscripción
+Consultas Académicas: Búsqueda de información
+Usuarios del sistema: Director, Secretaria, Docente, Auxiliar, Padre de familia, Estudiante.
+
+Enfoques evaluados
+1. Microservicios
+
+Ventaja: Alta escalabilidad, autonomía de despliegue
+Desventaja: Alta complejidad, curva de aprendizaje elevada, overhead de comunicación
+2. Monolítica en Capas
+
+Ventaja: Simplicidad, desarrollo unificado
+Desventaja: Escalabilidad limitada, despliegue conjunto
+Decisión
+Adoptar la Arquitectura Monolítica en Capas.
+
+Estructura del proyecto
+src/main/java/com/colegio/emanuel/
+├── controller/
+├── service/
+├── repository/
+├── model/
+│ ├── entity/
+│ └── dto/
+├── config/
+├── exception/
+└── util/
+
+### Capas del sistema
+
+**Presentación (Controller):** Expone endpoints REST, validación de entrada, respuesta al cliente.
+
+**Negocio (Service):** Lógica de negocio: cálculo de promedios, clasificación de asistencia, generación de comprobantes.
+
+**Persistencia (Repository):** Acceso a base de datos única con JPA/Hibernate, integridad referencial.
+
+**Dominio (Model/Entity):** Entidades del sistema: Usuario, Estudiante, Matrícula, Nota, Asistencia, Pago, Comunicado.
+
+---
+
+## Tecnologías
+
+- Java 21 - Lenguaje de programación principal
+- Spring Boot 3.x - Framework principal
+- Spring Data JPA - Acceso a datos
+- Hibernate - ORM para mapeo objeto-relacional
+- Spring Security - Autenticación y autorización
+- MySQL 8.x - Base de datos relacional
+- Flyway - Migraciones de base de datos
+- Lombok - Reducción de código boilerplate
+- MapStruct - Mapeo entre DTOs y Entities
+- JUnit + Mockito - Pruebas unitarias y de integración
+- Swagger/OpenAPI - Documentación de API
+
+---
+
+## Consecuencias
+
+### Positivas
+
+- Desarrollo Rápido: Un único proyecto, una única base de datos y un único despliegue
+- Transacciones Consistentes: Operaciones ACID en una sola base de datos
+- Curva de Aprendizaje Reducida: Solo Spring Boot, sin complejidad distribuida
+- Facilidad de Pruebas: Pruebas de integración directas sin mocks externos
+- Menor Costo Operativo: Un solo servidor para despliegue
+- Mantenimiento Simplificado: Un solo codebase para debuggear
+
+### Negativas
+
+- Escalabilidad Limitada: No se puede escalar un módulo independientemente
+- Riesgo de Acoplamiento: Los módulos pueden volverse dependientes si no se mantiene la separación
+- Despliegue Conjunto: Cualquier cambio requiere redesplegar todo el sistema
+- Monolito Grande: Requiere modularización por paquetes y principios SOLID
