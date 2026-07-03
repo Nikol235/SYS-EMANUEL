@@ -1,114 +1,79 @@
-\# SISTEMA DE GESTIÓN EDUCATIVA - SYS COLEGIO EMANUEL
-
-
+### SISTEMA DE GESTIÓN EDUCATIVA - SYS COLEGIO EMANUEL
 
 Documentación del sistema de gestión académica y administrativa para el Colegio Emanuel.
 
+## Tecnologías
 
+- Java
 
-\## Tecnologías
+- Maven
 
-\- Java
+- PlantUML
 
-\- Maven
+- Arquitectura Monolítica en Capas
 
-\- PlantUML
+## Modelado
 
-\- Arquitectura Monolítica en Capas
+- UML
 
+- Casos de uso
 
+- Diagramas de secuencia
 
-\## Modelado
+- Diagramas de estado
 
-\- UML
+- Diagrama de clases general
 
-\- Casos de uso
+# Casos de Uso
 
-\- Diagramas de secuencia
+### CU01 - Iniciar sesion
 
-\- Diagramas de estado
+![Diagrama de Clases](https://www.plantuml.com/plantuml/png/NL1BJiCm4Dtx5AEoRZT8NQ0gQYbHLQbGf00Ioo4UmgYENVc3a12duWXS3DU9GqesyVkyyVWjdKVhGwk4ebSFte3bvis3P4krPwE5Ex0-eiKMNh0-DDO4BTT66GiNr_FoSZKN0ciVuUGcPOoT03gGFSXYHRKbZvOnoMw0GzhKf3rruUwSfLNuOCNO3SOUPF4UfUrInzCfqwNpGJBcYJH08Oxn7TXGt8cTfnQXUgvWlT-Lc-qUojlLtMEvcy2dWFY5k2YwwDrghkEjK97Zds-TXYhJi3wtFQ5Y6MrhIv9qJ2XooVlU2UVk3McoqVrW3gH1qjbqVoB5bn2vIfXEY_xEl_f6PD_QYCbTZQXKqWWFnOn9aNumcnLvRxY2nO9rhOAaeXZfQSj_gbYIbg5Llm00)
 
-\- Diagrama de clases general
+### CU02 - Registrar asistencia
 
+![Diagrama de Casos de Uso - Asistencia](https://www.plantuml.com/plantuml/png/VT11IyCm50VmUpx5evwtYx23ZB9QYWXpSniJF3wJh7iiJSPB8eBugVm8VZ5ZtQhjORSc_VqV_vUP3yWXDaOOlGiG733L-m2AMCj0pWf_87j4nWPUK1vgTj6gqXd7S7KxgQwBYH0eGpfcHNmZGyWPe0Sy7OGufXZM6h8D-Q0RXCtp1ihblBgxNqBrK2osrJo3Tm404BsMw9DTwpffHeR2_yIi96pdylb7tnSncK0I6RO-8fCxjGZxFdn2GogfykjJKUrWjMxXw-_rQjtNfK5FktPivGCg1qeF6ydEzBCB5qvHDF28YdNBxVbQV0XnVYKOZV9_gudk4yRZlDq2Rc0w9IjDL3hF1w1hVr7z5Rt4ke939MRQgjYORm00)
 
+### CU03 - Pago mensualidad
 
-\## Casos de Uso
+![Diagrama de Clases / Componentes](https://www.plantuml.com/plantuml/png/VP7Fpjem4CJlVeeLFNzSAd6eK0H44Qh4dwg8IZqkzX8i4Xkjrpsqwhj_ZX61S4XEyVetsPd98WYonBPH3Pq5n0FR-Y9WB9CMwvqAL-jkoDZ22VMrPX-TANtZ6RwiPjNNvKmfr9AEamDf9a6sE04C4FgZKhSanPeIOuDGYt3uVO1olwdMt_TGRPUxOxMPm3y5wOb9Y26nFwbED2F33wmz688jkH2niGPDNi4FOYXSHY4dLYVbCV5iVQOnocK8hcBee2f8D1QTKEPEUJeaV-Mj35llfBEIBMNwJxvvTw2by_dt_d4qML96Se9tA_tzKBScHrtWqhStzgVEqc2PViw7mfqNUyw9iKcuOSgyUupLVwMUFmG-FegNybJ_2jDfaNk2Rp2VMwURQAWete1xGQD8RcMSwKiOnrupZt9zrZTABSYPs3QV)
 
+### CU04 - Registrar notas
 
+![Diagrama de Flujo / Proceso](https://www.plantuml.com/plantuml/png/VT3FIyCm50VmU_wAHprl5s476MMr5X7cDbOcU7mcRrrOcepaHH3nVpTaFrmzhASc-Np3-sOM63t7tWX3MmPsu7MtOr3QasJjh0XxRG_eiOSFbFlEksXLxOppSFSuQUwhYH0eEIsB9oV9CXM00TJnNuX32c57KBGwCFK8xNiBzNBUFByieNcj5fjcNi2tWFJ5G193iclgalReOU4OGxxHd_U6j8fCbhLCTXCYUksoniYx8Mp9a9IfKP9rzC715rGczlOO27_7mzmR6grIPessSw0eZvGZdyUJ8Q_Ho6YINtdNapgDSpWjXZRTfBTvT3ImGkKfOtlU5Zz2d1uIHgFowWd4vHV6upAtXGUOJhML9Yegoo6uRdVJvKgtpQNBJNJfy4-96LaLU_CB)
 
-\### CU01 - Iniciar Sesión
+### CU05 - Publicar avance
 
-!\[CU01](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU01-iniciar-sesion.puml)
+![Diagrama del Ciclo de Vida / Proceso](https://www.plantuml.com/plantuml/png/VP31Rk8m48RlVefHzWoNbJYiK4GsJQjA591I3ZqEpX0i71lPuwfLrNUlSK0qEN2RpFzDydzPU4R7eTD2qvw1BJZL7XWQvKYoiaRuep8dTDZ13kMnTJQOfhJQElZpVrRzBMP2eEJuc3rOIOOf0_JGzBCGftY4BK5MAy_K8THlDPJhPVNql8RgfLXjgsK6Nm8087YIw2Ex2Jkj93eetj58WazuHKVeqwjFbt1uKWGcm-bewmCwPHECWGz3i2PDKaQpI9R1-Pxpj-q83plbuD6oZL84fKRV6-xFgr47hrg3hY-R83vFGsXbMUrJJuGDDevwAtDTYsyXBdyF9fFyfYkk4qodUHA3Vp2VAoDrQ2ZF1_bleNjOiaW0VJ2PPfmdWJlvjVRu8s8HuT3f7m00)
 
+### CU06 - Enviar comunicado
 
+![Diagrama Adicional del Sistema](https://www.plantuml.com/plantuml/png/TL7DJiCm3BxdAQnntYv8Ew2fMjagG1eRejg1OqYzDbgQJFcPG8YduX5uCKpQZdPYkIJsztsE_NdkFBS-r8eft7dm1gmiAm-5j2YyD9gvlTG7RdaDhrpiIsk2BXP66GjNjzFiEfqoneMdSBIC6cD7m1qKRT21EGgBz9Va4NQdyAGs0hN7HjoyEoWDRr99RYF6su2n0_N3IwJQqdciEUGlEImsg-pkOGFPOxhUPgiHV32W4-X3xeYRwIE9OM7geANWXO5tI8_IcLWS8pfKfC5JCyIri7M1McweFFXgICnHeH3a6J6NwBpKtF_INJDJFpCKFcD1amwwYXBRvl-TO6syt15NoEyl3K_1LL5peCTvzPByiIIvfzkGvIeogovYdunrwuBnEEbS-DjHFzlkff_gLjBFiUQ6oII9Li4Dp6PI2nKAJ98UEZJcCgqpuo8ZZduPFOrxHc5pr4MerGy0)
 
-\### CU02 - Registrar Asistencia
+### CU07 - Gestionar usuarios roles
 
-!\[CU02](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU02-registrar-asistencia.puml)
+![Diagrama del Sistema](https://www.plantuml.com/plantuml/png/VP31Rl8m3CVlUGghtnc-moGE4whee4AJs91077RqKgz4f0rod6dJj4VQK-p55Y9W8mTwijlVt-xF4o_84ZghBBq8Y0CsxLQWCKnQZEkLtvb-ZumTFAFUjUn2tqoTTGp_xaRrJJLI2hN4jfYbZEC2q4DpR9JQnnYs1CNQUA4EOVsqXkboKS_lbr0_L8-RUb70XuBu14yQVMJdv0_RaM7Z0x9n7jvXvIpvDBqzVRvCLK6e5wD_Oud68DjBSCgKCPefdrOtHZAAqgjigHRpYln_HXvJcKMyOEEoY3VjmIqA9OQTlGHMr1el794gn9MElx_mg99QW-fJgTEDOJ0e_vn4dKiO3ija3xSm7fjUsz1GMMP0Kay4lGdrJGuawwl4KV8Q4HMl_iHPBAFK94uBdVq1)
 
+### CU08 - Consultas academicas
 
+![Diagrama del Flujo de Trabajo](https://www.plantuml.com/plantuml/png/VP11Rl8m48NtFiKe_neslyIYGX4XZMWb2fKGYowDCmMBn8x6uwfIrGFr7BrOZKqHGOLiycRccvVCcpYMnBvjH8El36o1z7R7K6j2nTeQuVRQT99a2nkfzbkotjIbRIp1l-ce-b-CX92AGvazovem0-cWEwZVzhrLQ3WDwgI5w8ANt29aA-qOMmchbnMKotarUrn2zLGirjKyWmy1uV4EbNI1BQrnlk7WKoXPVt-rElIZhpfEgBzGU4R3WI9OEoz9sqXBpxk_dGaMbe-Uvg2kOOKx_BTHMYR7KtbjuS7IwVkxfFle30rI0AUsGKwkcoZxM6NUTA0wIr1Q8aoEAahnAKIC7WQ3_2oJbFfbLvma38Tv30NkO3pMHZM-nZpl0ocFIE0xewalWRCGRb77usyXwUvRHBgtJuX9UFks-G40)
 
-\### CU03 - Pago de Mensualidad
+### CU09 - Recibir notificaciones
 
-!\[CU03](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU03-pago-mensualidad.puml)
+![Diagrama del Sistema](https://www.plantuml.com/plantuml/png/VL7Dpjem4BpxALRf6IwLE5GeWaBKLk87bVRGus8lOKLYH_v1bQe-Kazz15wincxGbtpITyfwPoQpixjm7gqFRICQEdlm1YpN5m-ABKdFHWjtPTsXnHPEAA-rDK6hbMcCXNSVPzNxvKm8b3u-YmCgImMWW-vHzUsraQHz1bIkUwXoFYZ67gNdKuWkcc5DK1pPUMeHZZ-EiDflgazVzb1jbxllrQQ0Nm8083YIw2BtAqa-iOMTyNncYJ8680U7u2x9m6PyBAgZXKKBtyoLD2Y2DRlEEFPyCqdd7y1GLUaRuqkd-ryDdR5GtMB2BAF46UfMHhlG-2Zz75sDPMn0qMZYfBxq-F07MxJobR4qhO4DtVyeJDesaSHl8T8fO38fd-7p3OQzVlEZjlXVm7HQvYN01vZFMSicA2hB0PxJla5u1aeS-kb9gn4bppt4nI9-Gzly0m00)
 
+### CU10 - Gestionar Cursos
 
+![Diagrama del Sistema](https://www.plantuml.com/plantuml/png/VP5FR_8m3CRl-HGMxnakhyHXGXMiL6WIZ0DYqevUufM8j47vWpPD--upOUre3d32zkzvx3oT-u0knCO8G-y1WWMdwqC0fHt9e6qh_56t9tJOm1lAO-riR5LfZNNmxt5Q_LzCXK0Pk1mjayQw4Q07zLjqmnr9HxnBOnhxlXJYnBvO4pFQ1seGTgyxABVhQlMqXMgpUDvNwn5y2U1VP25wPbVaB-UXWmq6OXyFdr16vwrF2-fkFfGjOg0sQCcwlO-ytoOQOpWCmT8HCyam4NnkxbKf7GOCfKQsqEkwPMff9IycG7CZm3JC54looD6V1zQgRmxX5pHQNUpZoMY9wagVhrtnBKJt7M0yBcv2-Si_6uZ-BqmcHGe67c0sqwqqKL5HP43A9H7qmT6g74YXt2Nwjzsbkgpk7dDzTyw8EVl5nlm0)
 
-\### CU04 - Registrar Notas
+### CU11 - Matricular estudiante
 
-!\[CU04](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU04-registrar-notas.puml)
+![Diagrama de Arquitectura / Flujo](https://www.plantuml.com/plantuml/png/XPB1Ji9048Rl-nGJF8C74mw6D5HiY0c8GZ3nEEwkPKExMsPdJOpngNW4NiobLP0UeAVkplVF_FEtGyz87Cf25FgTWHsGoLSCof2MR9mLVcriXOGblA5Sv-I2LIDNE8Ahktvsa_Q5GCdns5beIJgsCzW1zE0FHo6gACLSHyPurYN2udK1ezaa6p_C89kcZyjiqe4l0V49KOW-ibDaCZ8KI91v3igWPLstBW-LKqKQM5is4WcMFY0PL-COU7KApdKUZL3axf6T1wMBzWpwGouhdr2HlauhfpIXQcPM-xkMEszoYmJZFGIV4FEIPhUrZSUcUAeOQnix4ensMsLo1y_pcjsqi1SiZDexSZAKCG3dQ-oZkHRVGXo_1NIxoV_ynF4TUhsapWfkOJ0mLXP1wIHf4uTWpc9D0EUHtvtFGviBzMRBDYI6sghuM_y0)
 
+### CU12 - Mensualidades financieras
 
+![Diagrama del Sistema](https://www.plantuml.com/plantuml/png/VP7FwXen483lUOh1dlLIy51aqUfM1ArGww77QJAkmTr49XEmbBvxOzpLdokufvtCzsN-P1e4MM9JgveE0kA1RNKKC9P9Y_LEXPDrPsHiu3VgKyK-EZFtjMVuz7LSVfwDbK8jAHmiikDv01Z0j46Nt95c4cIBEHtkeLBdT2zMb1WRX1g4tQyTpBVhShdQGhcPVT-Nwm7yLP2-c4GCYLrIkBQ731jo8M9j3HeAyCqwTDeIOyY5gevxrcTHo8dLoTydcwtFD4OvzkiuuaJzeBDd8J04ArSn1N-xds_dpzBSfvPgITg2el5CDzQqmGjyi5NaHFz4jeS4_abUq96Sj5Ka9tfYURcMVlIMIMeFrJ-bkZU0uR3ui8Z7xdi9TV-5qQZ8ou0lC9bOf-jeg2XwG3jxPkWYvCmBqetyXcc7UujqK_NQKTC4nwR-3m00)
 
-\### CU05 - Publicar Avance y Tareas
+### Diagrama de Clases General - SYS COLEGIO EMANUEL
 
-!\[CU05](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU05-publicar-avance.puml)
-
-
-
-\### CU06 - Enviar Comunicado
-
-!\[CU06](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU06-enviar-comunicado.puml)
-
-
-
-\### CU07 - Gestionar Usuarios y Roles
-
-!\[CU07](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU07-gestionar-usuarios-roles.puml)
-
-
-
-\### CU08 - Consultas Académicas
-
-!\[CU08](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU08-consultas-academicas.puml)
-
-
-
-\### CU09 - Notificaciones Push
-
-!\[CU09](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU09-recibir-notificaciones-push.puml)
-
-
-
-\### CU10 - Gestionar Materias y Cursos
-
-!\[CU10](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU10-gestionar-cursos.puml)
-
-
-
-\### CU11 - Matricular Estudiante
-
-!\[CU11](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU11-matricular-estudiante.puml)
-
-
-
-\### CU12 - Mensualidades Financieras
-
-!\[CU12](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Comportamiento/1-Casos\_Uso/CU12-mensualidades-financieras.puml)
-
-
-
-\## Diagrama de Clases General - SYS COLEGIO EMANUEL
-
-!\[Diagrama de Clases](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Nikol235/SYS-EMANUEL/feature/inicial/2-MODELO\_UML/Estructura/DC-DiagramaClases.puml)
-
+![Diagrama de Clases General - SYS COLEGIO EMANUEL](https://www.plantuml.com/plantuml/png/Z5An3jiW4Dtz5MoP-WcLUeABTP8D5c0hdIhaq0Z9iIkRTAdwxoN63FKKfdjmxzrxmBSjkZM-dbCLGvmy4y4zLlTqxEuPdzpcDrRxsQzkOb-O-MuOLmtMf1Ys87jigkhozODLNHZAlZKVTllvzMHwcTYVYgKbI2EtIk_08DTeGHFaCyLHMjnhw6_K4EI-3eJEssXiBmZUNN-hh8qfzds1BMpHpsDmno2BRQT1gWn0YonmXSR2YTkvntAmEfI2YeaqjmQH5GQKd8uQRqgYJYSddTR5DOolgLW0Rcd8qL9CIemCh0RJ923EHkGImyymkZ4iyw61Sg32GsarrWMb90q9EDakWZRyMl2tdsD91eQCVOV83AbiBc00oR7S4kPDhjfU4Y_XMvIcX_SqSN9itUhT-UvEPii3_6zE-2s6sKMtXcBHAg7CNjMwZ3R8EIcvrtqoeKdzGDCXfolnz02VVrhUW47shnAhsMtS1i9tFuMGKxk55-rLA8gw-K4Ns2nsdQH0ZpGvSOXAf41IRb3q1Nhem_GPyc8bHNbsDA8D-R9P3uUZRtxcuv2_n7yMRX4x7voGePADyBvwyZt1kgwq6YLrfKqOXSQsEmU-hXw2qsO_IaK7JQELvVBUWpEY1IRkXFT_MgT-5Vw5BJdRrAcRZePbq8S8O6Tj0yACqcUGB-BQmL17TNKZ0Zpg5bR3ydTLO_VQVFCjtJMARH-I_62r6eLIj3ijtESH4Qx6kEUet6W7CbY7OP5MwRszRRjeMbaAFvbp8DmODlQbVQe7QuIxxfstdgyEnEMsq5aNO0xZ0QBfL4jY6H07U-s3IvxjEPBssCOkrdYlj301c0gOWuv8RTiRBQFrGboiXBXl0Pgu2Bu3gKMZbL2dW4Pk40n5r-yQBONR78IH7ABmUc-46ngqW3xjqhu0VDE_wYOkNnX7vD-BFlPPAFSrHife5fW03JnRCoiZQtpVX6XM2WMjbcYQAzn3_4yExFphcDvPcd21uQ48IQzz4bAtEf5jxZQ68YV1bp7cp7gAxiWqF_wzNcE3JQIatfbsBhk945CwaUROJqGa82XVhtyQJk-w2XeCBAVR-ytZzktVwwUFcuLRSax86OeyYxBCj2JmP0LPBY_ltRpDFCZ4Y9njmMchB9RIh3T3iiIF-2EP7eRYSZTzro0J45v5wafaqJcx4wP4NzT3sNtP4gU_RActB-Gee04O1Zh2yoVEXIaKKeZ41O8y0IECUlN3rL07Lz-_V__kYgIenlvVeH2rurzIK55NMkV0TzOeg4vjo8GGuMcJrgXUqk5PmB8a7qfctgtNwI_6DUfrriC5vRk9my_RF_TfnhYaV8V3YsGn_IuC22oLoukL9tPn5JRQ9xvi-jRam_LZ57mjmCH117RwIL0d-zRLbRBzhe5ftp20TkV17OQA15-gs6sk6Cld4dHYAyo-u80KpN0cVtQs1QMZ1k91B_91UAFPd9R5C_AOT8m2Bvtk2Y5_ji7w9zTubBFZTzxE0zyJ0CDl-lsWGz_mq348F72t9ZZO7r7JK_vKHz-bRJII272qnN5cCKNAw6_OK0J5wBTS1dne67VJ08u76EUSt5Tr1SR3stzYXMFd2JsXMcqoCsKHqqi5dip5IFM2VPGf8LnACcLDkyjiLBOtBSzwh9yoGAvxrcvEOvscQsQDQ-HoMUMVJ8VKHFPQwXqZrlFwej5_YHKL9tLQEHTF4VJMUWaDZoH3NmK87Q3mF2MyM5TWgr9VaE-i65tbTNwRwOLJK-B0iPj5UUv9kI8NxSld_wgmXecQRaZH75uabAsaRUtonDrz-BI9QRlTNdP-adcTP8n8QShQ-KNRQ3lHi2ROHnj4mmulJ1y-0D4o-0qC6-YFn0ekXOEabLZ0wwEB2b5Gl1ScHU9P-aa1cxu5PyciY0uIXx9jvb4BmMOSfSCZox66puwcP3SU9VVfkyMZPBoItsaZZDJWg7VZ6dMmF3M4b2Bk5ba1er8seBGu98lluzFnIT_vRVKr8Pwsvkac8tM9r4PbL7qORlSsDLLYzaOeaQw0L3_fadf2awT7yQo6V73oM9md2Sc06b-wQJ4Da8V4X-htzEYOdkqswKNlzk4YOi2t5bfVA9pqaF2z2Rp2P0-ki-Mvwg3d_1xO4sKzUxHSdRu-qPUFEGNGLrxY31NFPiL5xWHyywt9-s-HyUZ7pWM3S1gEQqgWJtJrJZGf48LfsFu1vaRxpdeTz84cC2rDdKs2k-lxyzUUPVS973CPN6r8olWpefyc9Gjc24jrzC5eoGi9m_hQwGL4X4RFrfK4b_NvWn5lO6oFp15Ao21MHCZKQKrWgtFRHMMS5ilAl08ePPtQaW9FOUI7WOaIUru0NudEAd39DHN3-pCOrRVD_m00)
